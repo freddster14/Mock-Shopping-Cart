@@ -12,7 +12,7 @@ function Home() {
             </div>
         </nav>
         <header>
-            <h1>Shop Latest Dealz</h1>
+            <h2>Shop Latest Dealz</h2>
             
         </header>
         <section>
