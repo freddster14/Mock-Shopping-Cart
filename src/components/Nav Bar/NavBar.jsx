@@ -21,8 +21,6 @@ function NavBar() {
 
     }, [])
 
-    console.log(data)
-
     return (
         <Suspense fallback={<Loading />}>
         <nav>
@@ -37,7 +35,7 @@ function NavBar() {
           (<h1>Shop</h1>)
         : name === "products" ?
           <Products items={data}/>
-        : <Home items={}/>
+        : <Home items={data}/>
         }
         </Suspense>
     )
