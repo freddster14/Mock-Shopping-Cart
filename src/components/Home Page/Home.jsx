@@ -1,26 +1,25 @@
 import { Suspense } from "react"
-import { Link } from "react-router-dom"
 import Loading from "../Route/Loading"
+import styles from './Home.module.css'
+import PropTypes from "prop-types"
 
-function Home() {
+function Home({ items }) {
+    let randomIndex = Math.random() * items.length
     return (
       <Suspense fallback={<Loading />}>
-        <nav>
-            <h1>Home Page</h1>
-            <div>
-                <Link to="/shop">Items</Link>
-            </div>
-        </nav>
-        <header>
-            <h2>Shop Latest Dealz</h2>
-            
-        </header>
         <section>
+            <div>
+                <h2>Latest Drop</h2>
 
+            </div>
         </section>
         
       </Suspense>
     )
+}
+
+Home.prototype = {
+    items: PropTypes.array
 }
 
 

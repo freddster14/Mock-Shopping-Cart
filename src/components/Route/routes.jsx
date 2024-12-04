@@ -1,18 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from '../Home Page/Home'
-import Shopping from "../Shopping Page/Shopping";
+import NavBar from "../Nav Bar/NavBar";
 import Error from "./Error";
 
 const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <NavBar />,
       errorElement: <Error />,
     },
     {
-      path: "/shop",
-      element: <Shopping />
+      path: '/:name',
+      element: <NavBar />,
+      errorElement: <Error />
     },
+  
 ])
 
 export default router

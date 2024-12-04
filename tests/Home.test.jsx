@@ -7,9 +7,9 @@ describe("App component", () => {
   it("renders correct heading", () => {
     render(
       <BrowserRouter>
-            <Home />
+        <Home />
       </BrowserRouter>
     );
-    expect(screen.getByRole("heading", {level: 1}).textContent).toMatch(/home page/i);
+    expect(screen.getByRole("heading").textContent).toMatch(/feature/i);
   });
 });

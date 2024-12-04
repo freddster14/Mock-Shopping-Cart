@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react"
 
-function Shopping() {
-    const [data, setData] = useState()
-
-    useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
-    })
+function Shopping({
+    items
+}) {
+   
+    const products = 
 
     return (
         <>
-          <h1>{data}</h1>
+          <ul>
+            <li></li>
+          </ul>
         </>
     )
 }
