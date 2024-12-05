@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 function Products({ items }) {
     return (
         <ul>
@@ -7,6 +9,10 @@ function Products({ items }) {
         </ul>
        
     )
+}
+
+Products.propTypes = {
+    items: PropTypes.array
 }
 
 export default Products

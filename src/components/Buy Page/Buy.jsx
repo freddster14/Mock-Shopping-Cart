@@ -1,10 +1,11 @@
+import PropTypes from "prop-types"
 import { useEffect, useState } from "react"
 
-function Shopping({
+function Buy({
     items
 }) {
    
-    const products = 
+    
 
     return (
         <>
@@ -15,5 +16,9 @@ function Shopping({
     )
 }
 
+Shopping.propTypes = {
+    items: PropTypes.object
+}
 
-export default Shopping
+
+export default Buy
