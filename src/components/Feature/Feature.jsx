@@ -2,8 +2,9 @@ import { Suspense } from "react"
 import Loading from "../Route/Loading"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
+import { Navigate, useNavigate } from "react-router-dom"
 
-function Feature({ items }) {
+function Feature({ items, setSelectedItem }) {
     if(!items) return
     let arrayOfItems = randomIndex(items)
     console.log(arrayOfItems)
@@ -11,6 +12,7 @@ function Feature({ items }) {
         <FeatureContent 
         heroItem={arrayOfItems[0]}
         subItems={arrayOfItems[1]}
+        setSelectedItem={setSelectedItem}
         />
     )
 }
@@ -22,18 +24,24 @@ Feature.propTypes = {
 function FeatureContent({
     heroItem,
     subItems,
+    setSelectedItem,
 }) {
+  
+  let navigate = useNavigate();
+  function eventFunction(item) {
+    setSelectedItem(item)
+    navigate('/buy')
+  }
     return (
         <Suspense fallback={<Loading />}>
           <header>
-              <div className={styles.hero_item}>
-                  <h2>Latest Drop</h2>
+              <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
+                  <h2 className={styles.hero_item_title}>Latest Drop</h2>
                   <img src={heroItem.image} alt={heroItem.title} />
                   <div className={styles.hero_item_info}>
                     <h3>{heroItem.title}</h3>
                     <p>${heroItem.price}</p>
                   </div>
-                  
               </div>
           </header>
           <section>

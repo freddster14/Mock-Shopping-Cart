@@ -1,17 +1,19 @@
 import PropTypes from "prop-types"
-import { useEffect, useState } from "react"
 
 function Buy({
     item
 }) {
-   
-    
+    console.log(item)
 
     return (
         <>
-          <ul>
-            <li>{item}</li>
-          </ul>
+        <img src={item.image} alt={item.title} />
+        <div>
+          <h1>{item.title}</h1>
+          <h3>{item.price}</h3>
+          <p>{item.description}</p>
+        </div>
+         
         </>
     )
 }

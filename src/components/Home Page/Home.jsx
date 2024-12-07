@@ -4,10 +4,13 @@ import { useState, useEffect } from "react";
 import Products from '../Products/Products'
 import Buy from "../Buy Page/Buy"
 import { useParams } from "react-router-dom";
+import Cart from "../Cart/Cart";
 
 function Home() {
     const { name } = useParams()
     const [data, setData] = useState();
+    const [cart, setCart] = useState([]);
+    const [selectedItem, setSelectedItem] = useState()
     useEffect(() => {
         console.log("ran")
         fetch('https://fakestoreapi.com/products')
@@ -24,12 +27,20 @@ function Home() {
     return(
         <>
          <NavBar/>
-         {name === "shopItem" ?
-              <Buy item={null}/>
-            : name === "products" ?
-              <Products items={data}/>
-            : <Feature items={data} />
-            }
+         {name === "buy" ?
+            <Buy item={selectedItem}/>
+          : name === "products" ?
+            <Products 
+            items={data} 
+            setSelectedItem={setSelectedItem} />
+          : name === "cart" ?
+            <Cart 
+            cartItems={cart} 
+            setSelectedItem={setSelectedItem} />
+          : <Feature 
+            items={data} 
+            setSelectedItem={setSelectedItem} />
+          }
         </>
        
     )
