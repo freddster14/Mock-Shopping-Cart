@@ -19,10 +19,8 @@ function Cart({ cartItems }) {
     )
 }
 
-
-
-Cart.propType = {
-    cartItems: PropTypes.array
+Cart.propTypes = {
+    cartItems: PropTypes.array,
 }
 
 export default Cart

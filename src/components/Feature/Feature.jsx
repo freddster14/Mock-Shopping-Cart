@@ -2,31 +2,45 @@ import { Suspense } from "react"
 import Loading from "../Route/Loading"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-function Feature({ items, setSelectedItem }) {
-    if(!items) return
-    let arrayOfItems = randomIndex(items)
-    console.log(arrayOfItems)
+function Feature ({ 
+  items, 
+  featureItems,  
+  setSelectedItem 
+}) {
+    
+    if (!items) {
+      return (<Loading />)
+    }
+    console.log(featureItems)
     return (
-        <FeatureContent 
-        heroItem={arrayOfItems[0]}
-        subItems={arrayOfItems[1]}
-        setSelectedItem={setSelectedItem}
-        />
+        <>
+          {featureItems && 
+            <FeatureContent 
+            heroItem={featureItems[0]}
+            subItems={featureItems[1]}
+            setSelectedItem={setSelectedItem}
+            />
+          }
+       
+        </>
+       
     )
 }
 
 Feature.propTypes = {
-    items: PropTypes.array.isRequired
+    items: PropTypes.array,
+    featureItems: PropTypes.array,
+    setSelectedItem: PropTypes.func
 }
 
-function FeatureContent({
+function FeatureContent ({
     heroItem,
     subItems,
     setSelectedItem,
 }) {
-  
+
   let navigate = useNavigate();
   function eventFunction(item) {
     setSelectedItem(item)
@@ -46,7 +60,7 @@ function FeatureContent({
           </header>
           <section>
             {subItems.map((item => (
-                <div className={styles.sub_item} key={item.id}>
+                <div className={styles.sub_item} key={item.id} onClick={() => eventFunction(item)}>
                   <img src={item.image} alt={item.title} />
                   <div className={styles.item_info}>
                     <h3>{item.title}</h3>
@@ -61,19 +75,11 @@ function FeatureContent({
 
 FeatureContent.propTypes = {
     heroItem: PropTypes.object,
-    subItems: PropTypes.array
+    subItems: PropTypes.array,
+    setSelectedItem: PropTypes.func,
 }
 
-function randomIndex(array) {
-    let indexArray = []
-    let subArray = []
-    while(indexArray.length !== 4 ) {
-        let index = Math.floor(Math.random() * array.length)
-        if(!indexArray.includes(array[index])) indexArray.push(array[index]);
-    }
-    subArray = indexArray.slice(1)
-    return [indexArray[0], subArray]
-}
+
 
 
 export default Feature

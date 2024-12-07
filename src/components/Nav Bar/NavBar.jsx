@@ -1,13 +1,11 @@
-import { Suspense, useEffect, useState } from "react"
-import Loading from "../Route/Loading"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import styles from './NavBar.module.css'
 
 import PropTypes from "prop-types"
 
 function NavBar() {
     return (
-        <Suspense fallback={<Loading />}>
+        <>
             <nav>
                 <h1 className={styles.title}>NavBar</h1>
                 <div>
@@ -16,7 +14,7 @@ function NavBar() {
                     <Link to="/cart">Cart</Link>
                 </div>
             </nav>
-        </Suspense>
+        </>
     )
 }
 
