@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 
 function Products({ items }) {
+    console.log(items)
     return (
         <ul>
           {items.map((item) => (

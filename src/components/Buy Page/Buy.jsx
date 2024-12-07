@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import { useEffect, useState } from "react"
 
 function Buy({
-    items
+    item
 }) {
    
     
@@ -10,14 +10,14 @@ function Buy({
     return (
         <>
           <ul>
-            <li></li>
+            <li>{item}</li>
           </ul>
         </>
     )
 }
 
-Shopping.propTypes = {
-    items: PropTypes.object
+Buy.propTypes = {
+    item: PropTypes.object
 }
 
 

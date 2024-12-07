@@ -1,80 +1,38 @@
-import { Suspense } from "react"
-import Loading from "../Route/Loading"
-import styles from './Home.module.css'
-import PropTypes from "prop-types"
+import NavBar from "../Nav Bar/NavBar";
+import Feature from "../Feature/Feature";
+import { useState, useEffect } from "react";
+import Products from '../Products/Products'
+import Buy from "../Buy Page/Buy"
+import { useParams } from "react-router-dom";
 
-function Home({ items }) {
+function Home() {
+    const { name } = useParams()
+    const [data, setData] = useState();
+    useEffect(() => {
+        console.log("ran")
+        fetch('https://fakestoreapi.com/products')
+            .then(res=> {
+                if(res.status >= 400){
+                    throw new Error("Load Failed")
+                }
+                return res.json()
+            })
+            .then(json=> setData(json))
+            .catch(err => console.log(err))
 
-    if(!items) return
-
-    let arrayOfItems = randomIndex(items)
-    console.log(arrayOfItems)
-    return (
-        <HomeContent 
-        heroItem={arrayOfItems[0]}
-        subItems={arrayOfItems[1]}
-        />
+    }, [])
+    return(
+        <>
+         <NavBar/>
+         {name === "shopItem" ?
+              <Buy item={null}/>
+            : name === "products" ?
+              <Products items={data}/>
+            : <Feature items={data} />
+            }
+        </>
+       
     )
-  
 }
-
-Home.propTypes = {
-    items: PropTypes.array.isRequired
-}
-
-
-
-function HomeContent({
-    heroItem,
-    subItems,
-}) {
-
-    console.log(subItems)
-    return (
-        <Suspense fallback={<Loading />}>
-          <header>
-              <div className={styles.hero_item}>
-                  <h2>Latest Drop</h2>
-                  <img src={heroItem.image} alt={heroItem.title} />
-                  <div className={styles.hero_item_info}>
-                    <h3>{heroItem.title}</h3>
-                    <p>${heroItem.price}</p>
-                  </div>
-                  
-              </div>
-          </header>
-          <section>
-            {subItems.map((item => (
-                <div className={styles.sub_item} key={item.id}>
-                  <img src={item.image} alt={item.title} />
-                  <div className={styles.item_info}>
-                    <h3>{item.title}</h3>
-                    <p>${item.price}</p>
-                  </div>
-                </div>
-            )))}
-          </section>
-        </Suspense>
-      )
-}
-
-HomeContent.propTypes = {
-    heroItem: PropTypes.object,
-    subItems: PropTypes.array
-}
-
-
-function randomIndex(array) {
-    let indexArray = []
-    let subArray = []
-    while(indexArray.length !== 4 ) {
-        let index = Math.floor(Math.random() * array.length)
-        if(!indexArray.includes(array[index])) indexArray.push(array[index]);
-    }
-    subArray = indexArray.slice(1)
-    return [indexArray[0], subArray]
-}
-
-
 
 export default Home
