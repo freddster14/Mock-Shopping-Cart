@@ -12,7 +12,7 @@ function Home() {
     const location = useLocation()
     const [data, setData] = useState()
   
-    const [cart, setCart] = useLocalStorage("cart", "");
+    const [cart, setCart] = useLocalStorage("cart", []);
     const [selectedItem, setSelectedItem] = useLocalStorage("selectedItem", "");
     const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
     useEffect(() => {
@@ -43,6 +43,7 @@ function Home() {
          {  name === "buy" ?
             <Buy 
             item={selectedItem}
+            cart={cart}
             addToCart={setCart}
             />
           : name === "products" ?
