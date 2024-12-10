@@ -1,41 +1,46 @@
 import NavBar from "../Nav Bar/NavBar";
 import Feature from "../Feature/Feature";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import Products from '../Products/Products'
 import Buy from "../Buy Page/Buy"
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Cart from "../Cart/Cart";
-import Loading from "../Route/Loading";
+import { useLocalStorage } from "../../LocalStorage";
 
 function Home() {
     const { name } = useParams()
-    const [data, setData] = useState();
-    const [cart, setCart] = useState([]);
-    const [featureItems, setFeatureItems] = useState();
-    const [selectedItem, setSelectedItem] = useState();
+    const location = useLocation()
+    const [data, setData] = useState()
+  
+    const [cart, setCart] = useLocalStorage("cart", "");
+    const [selectedItem, setSelectedItem] = useLocalStorage("selectedItem", "");
+    const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
     useEffect(() => {
+        if(data) return
         console.log("ran")
-        fetch('https://fakestoreapi.com/products')
-            .then(res=> {
+        fetch('https://fakestoreapi.com/products', { mode: 'cors' })
+            .then( res=> {
                 if(res.status >= 400){
                     throw new Error("Load Failed")
                 }
                 return res.json()
             })
-            .then(json=> applyData(json))
+            .then( json => {
+                setData(json)
+                //resets feature items only on home screen
+                if(location.pathname === '/home') {
+                    const randomItems = randomIndex(json)
+                    setFeatureItems(randomItems)
+                }
+            })
             .catch(err => console.log(err))
 
-    }, [])
+    }, [location, setFeatureItems, data])
 
-    function applyData(items) {
-        const randomItems = randomIndex(items)
-        setData(items)
-        setFeatureItems(randomItems)
-    }
-    return(
-        <Suspense fallback={<Loading />}>
+    return (
+        <>
          <NavBar/>
-         {name === "buy" ?
+         {  name === "buy" ?
             <Buy 
             item={selectedItem}
             addToCart={setCart}
@@ -49,11 +54,12 @@ function Home() {
             cartItems={cart} 
             setSelectedItem={setSelectedItem} />
           : <Feature 
-            items={data} 
             featureItems={featureItems}
             setSelectedItem={setSelectedItem} />
-          }
-        </Suspense>
+         }
+       
+        </>
+        
        
     )
 }
