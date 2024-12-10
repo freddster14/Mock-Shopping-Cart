@@ -5,15 +5,14 @@ import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
 
 function Feature ({ 
-  items, 
   featureItems,  
   setSelectedItem 
 }) {
-    
-    if (!items) {
+  console.log(featureItems)
+
+    if (!featureItems) {
       return (<Loading />)
     }
-    console.log(featureItems)
     return (
         <>
           {featureItems && 
