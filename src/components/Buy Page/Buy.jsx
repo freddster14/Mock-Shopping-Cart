@@ -49,7 +49,8 @@ function Buy({
 
 Buy.propTypes = {
     item: PropTypes.object,
-    addToCart: PropTypes.func
+    cart: PropTypes.array,
+    addToCart: PropTypes.func,
 }
 
 

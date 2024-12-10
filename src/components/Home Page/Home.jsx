@@ -53,7 +53,7 @@ function Home() {
           : name === "cart" ?
             <Cart 
             cartItems={cart} 
-            setSelectedItem={setSelectedItem} />
+            setCart={setCart} />
           : <Feature 
             featureItems={featureItems}
             setSelectedItem={setSelectedItem} />

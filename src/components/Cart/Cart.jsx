@@ -1,7 +1,16 @@
 import PropTypes from "prop-types"
 
-function Cart({ cartItems }) {
+function Cart({ 
+    cartItems,
+    setCart,
+ }) {
     console.log(cartItems)
+
+    function removeItem(item) {
+        const newArray = cartItems.filter(e => e !== item )
+        
+        setCart(newArray)
+    }
     return (
         <ul>
             {cartItems.length > 0 ?
@@ -11,7 +20,7 @@ function Cart({ cartItems }) {
                     <p>{item[0].title}</p>
                     <p>${item[0].price}</p>
                     <p>{item[1].value}</p>
-                    <button onClick={() => console.log(item) }>Delete</button>
+                    <button onClick={() => removeItem(item) }>Delete</button>
                 </div>
             )))
         : <h1>Cart is empty add items</h1>
@@ -27,6 +36,7 @@ function Cart({ cartItems }) {
 
 Cart.propTypes = {
     cartItems: PropTypes.array,
+    setCart: PropTypes.func
 }
 
 export default Cart
