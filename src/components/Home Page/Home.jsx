@@ -14,6 +14,7 @@ function Home() {
     const [cart, setCart] = useLocalStorage("cart", []);
     const [selectedItem, setSelectedItem] = useLocalStorage("selectedItem", "");
     const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
+    
     useEffect(() => {
         if(data) return
         fetch('https://fakestoreapi.com/products', { mode: 'cors' })
@@ -26,15 +27,13 @@ function Home() {
             .then( json => {
                 setData(json)
                 //resets feature items only on home screen
-                if(location.pathname === '/home') {
+                if(location.pathname === '/') {
                     const randomItems = randomIndex(json)
                     setFeatureItems(randomItems)
                 }
             })
             .catch(err => console.log(err))
-
     }, [location, setFeatureItems, data])
-
     return (
         <>
          <NavBar/>
@@ -56,13 +55,9 @@ function Home() {
             featureItems={featureItems}
             setSelectedItem={setSelectedItem} />
          }
-       
         </>
-        
-       
     )
 }
-
 
 function randomIndex(array) {
     let indexArray = []

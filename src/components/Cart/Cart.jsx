@@ -55,7 +55,6 @@ function CartItems({
     )
 }
 
-
 Cart.propTypes = {
     cart: PropTypes.arrayOf(
         PropTypes.shape({
@@ -71,7 +70,7 @@ Cart.propTypes = {
 }
 
 CartItems.propTypes = {
-    item:   PropTypes.shape({
+    item: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string,
         price: PropTypes.number,

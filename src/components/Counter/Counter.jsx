@@ -8,7 +8,6 @@ function Counter({
 
     function quantityEvent(target) {
         let { value, min, max } = target;
-        //console.log(value, target)
         value = Math.max(Number(min), Math.min(Number(max), Number(value)));
         if(isNaN(value)) return
         setQuantity({ value });
@@ -30,8 +29,7 @@ function Counter({
           max="99" 
           type="text" />
           <button onClick={(e) => modifyQuantity(1, e.target.previousElementSibling)}>+</button>
-        </>
-        
+        </> 
     )
 }
 

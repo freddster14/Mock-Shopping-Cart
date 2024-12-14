@@ -1,10 +1,9 @@
 import PropTypes from "prop-types"
 import styles from './Buy.module.css'
-import { Suspense, useState } from "react"
-import Loading from "../Route/Loading"
+import { useState } from "react"
 import Counter from "../Counter/Counter"
 import { updateCart } from "../Cart/CartLogic"
-import { describe } from "vitest"
+
 function Buy({
     item,
     cart,
@@ -12,14 +11,14 @@ function Buy({
 }) {
   const [quantity, setQuantity] = useState({value: 1})
   
-    return (
-        <Suspense fallback={<Loading />}>
+  return (
+      <>
         <img src={item.image} alt={item.title} />
         <div>
           <h1>{item.title}</h1>
           <h3>{item.price}</h3>
           <p>{item.description}</p>
-          <label htmlFor={styles.label}>Quantity</label>
+          <label htmlFor="quantity">Quantity</label>
           <Counter 
           quantity={quantity.value}
           setQuantity={setQuantity}
@@ -28,12 +27,10 @@ function Buy({
             <button 
             onClick={() => setCart(updateCart(cart, item, quantity.value))}
             >Add To Cart</button>
-          }
-          
-        </div>
-         
-        </Suspense>
-    )
+          } 
+        </div> 
+      </>
+  )
 }
 
 Buy.propTypes = {
@@ -43,7 +40,7 @@ Buy.propTypes = {
       price: PropTypes.number,
       description: PropTypes.string,
       image: PropTypes.string,
-      value: PropTypes.number.isRequired,  
+      value: PropTypes.number,  
     }),
     cart: PropTypes.arrayOf(
       PropTypes.shape({
@@ -57,6 +54,5 @@ Buy.propTypes = {
   ),
     setCart: PropTypes.func,
 }
-
 
 export default Buy

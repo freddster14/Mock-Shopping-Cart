@@ -1,4 +1,3 @@
-import { Suspense } from "react"
 import Loading from "../Route/Loading"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
@@ -46,7 +45,7 @@ function FeatureContent ({
     navigate('/buy')
   }
     return (
-        <Suspense fallback={<Loading />}>
+        <>
           <header>
               <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
                   <h2 className={styles.hero_item_title}>Latest Drop</h2>
@@ -68,7 +67,7 @@ function FeatureContent ({
                 </div>
             )))}
           </section>
-        </Suspense>
+        </>
       )
 }
 
@@ -79,7 +78,6 @@ FeatureContent.propTypes = {
       price: PropTypes.number,
       description: PropTypes.string,
       image: PropTypes.string,
-      value: PropTypes.number.isRequired,  
   }),
     subItems: PropTypes.arrayOf(
       PropTypes.shape({
@@ -88,7 +86,6 @@ FeatureContent.propTypes = {
         price: PropTypes.number,
         description: PropTypes.string,
         image: PropTypes.string,
-        value: PropTypes.number.isRequired,  
     })),
     setSelectedItem: PropTypes.func,
 }
