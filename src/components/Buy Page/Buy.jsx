@@ -2,26 +2,16 @@ import PropTypes from "prop-types"
 import styles from './Buy.module.css'
 import { Suspense, useState } from "react"
 import Loading from "../Route/Loading"
+import Counter from "../Counter/Counter"
+import { updateCart } from "../Cart/CartLogic"
+import { describe } from "vitest"
 function Buy({
     item,
     cart,
-    addToCart,
+    setCart,
 }) {
   const [quantity, setQuantity] = useState({value: 1})
-    console.log(item)
-    function quantityEvent(target) {
-      let { value, min, max } = target;
-      value = Math.max(Number(min), Math.min(Number(max), Number(value)));
-      if(isNaN(value)) return
-      setQuantity({ value });
-    }
-    function modifyQuantity(value) {
-      const input = document.querySelector('input')
-      value > 0 ? input.value -= -1 : input.value -= 1   
-      console.log(quantity)
-      quantityEvent(input)
-    }
-
+  
     return (
         <Suspense fallback={<Loading />}>
         <img src={item.image} alt={item.title} />
@@ -30,17 +20,16 @@ function Buy({
           <h3>{item.price}</h3>
           <p>{item.description}</p>
           <label htmlFor={styles.label}>Quantity</label>
-          <button onClick={() => modifyQuantity(-1)}>-</button>
-          <input 
-          id={styles.label} 
-          value={quantity.value}
-          onChange={(e) => quantityEvent(e.target)}
-          placeholder="1" 
-          min="0" 
-          max="99" 
-          type="text" />
-          <button onClick={() => modifyQuantity(1)}>+</button>
-          <button onClick={() => addToCart([...cart, [item, quantity]])}>Add To Cart</button>
+          <Counter 
+          quantity={quantity.value}
+          setQuantity={setQuantity}
+          />
+          {quantity.value > 0 &&
+            <button 
+            onClick={() => setCart(updateCart(cart, item, quantity.value))}
+            >Add To Cart</button>
+          }
+          
         </div>
          
         </Suspense>
@@ -48,9 +37,25 @@ function Buy({
 }
 
 Buy.propTypes = {
-    item: PropTypes.object,
-    cart: PropTypes.array,
-    addToCart: PropTypes.func,
+    item: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      image: PropTypes.string,
+      value: PropTypes.number.isRequired,  
+    }),
+    cart: PropTypes.arrayOf(
+      PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          title: PropTypes.string,
+          price: PropTypes.number,
+          description: PropTypes.string,
+          image: PropTypes.string,
+          value: PropTypes.number.isRequired,  
+      })
+  ),
+    setCart: PropTypes.func,
 }
 
 

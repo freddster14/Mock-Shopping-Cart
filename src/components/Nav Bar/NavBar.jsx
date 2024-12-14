@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom"
 import styles from './NavBar.module.css'
 
-import PropTypes from "prop-types"
-
 function NavBar() {
     return (
         <>
@@ -16,10 +14,6 @@ function NavBar() {
             </nav>
         </>
     )
-}
-
-NavBar.propType = {
-    items: PropTypes.array
 }
 
 export default NavBar 

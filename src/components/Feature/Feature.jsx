@@ -73,8 +73,23 @@ function FeatureContent ({
 }
 
 FeatureContent.propTypes = {
-    heroItem: PropTypes.object,
-    subItems: PropTypes.array,
+    heroItem:  PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      price: PropTypes.number,
+      description: PropTypes.string,
+      image: PropTypes.string,
+      value: PropTypes.number.isRequired,  
+  }),
+    subItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string,
+        price: PropTypes.number,
+        description: PropTypes.string,
+        image: PropTypes.string,
+        value: PropTypes.number.isRequired,  
+    })),
     setSelectedItem: PropTypes.func,
 }
 

@@ -11,13 +11,11 @@ function Home() {
     const { name } = useParams()
     const location = useLocation()
     const [data, setData] = useState()
-  
     const [cart, setCart] = useLocalStorage("cart", []);
     const [selectedItem, setSelectedItem] = useLocalStorage("selectedItem", "");
     const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
     useEffect(() => {
         if(data) return
-        console.log("ran")
         fetch('https://fakestoreapi.com/products', { mode: 'cors' })
             .then( res=> {
                 if(res.status >= 400){
@@ -44,7 +42,7 @@ function Home() {
             <Buy 
             item={selectedItem}
             cart={cart}
-            addToCart={setCart}
+            setCart={setCart}
             />
           : name === "products" ?
             <Products 
@@ -52,7 +50,7 @@ function Home() {
             setSelectedItem={setSelectedItem} />
           : name === "cart" ?
             <Cart 
-            cartItems={cart} 
+            cart={cart} 
             setCart={setCart} />
           : <Feature 
             featureItems={featureItems}
