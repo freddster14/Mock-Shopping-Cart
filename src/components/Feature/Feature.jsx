@@ -7,7 +7,6 @@ function Feature ({
   featureItems,  
   setSelectedItem 
 }) {
-  console.log(featureItems)
 
     if (!featureItems) {
       return (<Loading />)

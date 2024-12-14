@@ -1,3 +1,38 @@
+nav {
+    display: flex;
+    height: 75px;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    padding: 0px 25px;
+    justify-content: space-between;
+    background: rgb(27,29,26);
+    background: linear-gradient(90deg, rgba(27,29,26,1) 2%, rgba(41,75,78,1) 65%, rgba(68,121,127,1) 100%);}
+
 .title {
     font-size: 48px;
+}
+
+.link_container {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 15px;
+}
+
+a {
+    text-align: center;
+}
+
+.link_active {
+    background-color: #294b4e;
+    border: 1px solid rgba(27,29,26,1);
+    margin-top: 15px;
+    padding: 10px 10px;
+    padding-bottom: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: background-color 0.2s ease-in-out;
 }

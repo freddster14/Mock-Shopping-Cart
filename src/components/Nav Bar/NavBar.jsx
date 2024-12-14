@@ -1,15 +1,34 @@
-import { Link } from "react-router-dom"
+import { useNavigate, NavLink } from "react-router-dom"
 import styles from './NavBar.module.css'
 
 function NavBar() {
+    const navigate = useNavigate()    
     return (
         <>
           <nav>
-              <h1 className={styles.title}>NavBar</h1>
-              <div>
-                <Link to="/">Home</Link>
-                <Link to="/products">Products</Link>
-                <Link to="/cart">Cart</Link>
+              <h1
+              onClick={() => navigate('/home')} 
+              className={styles.title}>
+              Title</h1>
+              <div className={styles.link_container}>
+                <NavLink 
+                  to="/"
+                  className={({isActive}) =>
+                  isActive ? styles.link_active : ""}>
+                  Home
+                </NavLink>
+                <NavLink 
+                  to="/products"  
+                  className={({isActive}) => 
+                  isActive ? (styles.link_active) : ""}>
+                  Products
+                </NavLink>
+                <NavLink 
+                  to="/cart"  
+                  className={({isActive}) =>
+                  isActive ? styles.link_active : ""}>
+                  Cart
+                </NavLink>
               </div>
           </nav>
         </>
