@@ -1,4 +1,5 @@
 import Loading from "../Route/Loading"
+import Category from "./Category"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
@@ -12,17 +13,11 @@ function Feature ({
       return (<Loading />)
     }
     return (
-        <>
-          {featureItems && 
-            <FeatureContent 
-            heroItem={featureItems[0]}
-            subItems={featureItems[1]}
-            setSelectedItem={setSelectedItem}
-            />
-          }
-       
-        </>
-       
+      <FeatureContent 
+      heroItem={featureItems[0]}
+      subItems={featureItems[1]}
+      setSelectedItem={setSelectedItem}
+      />
     )
 }
 
@@ -38,14 +33,15 @@ function FeatureContent ({
     setSelectedItem,
 }) {
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
   function eventFunction(item) {
     setSelectedItem(item)
     navigate('/buy')
   }
     return (
         <>
-          <header>
+          <header className={styles.header}>
               <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
                   <h2 className={styles.hero_item_title}>Latest Drop</h2>
                   <img src={heroItem.image} alt={heroItem.title} />
@@ -55,6 +51,13 @@ function FeatureContent ({
                   </div>
               </div>
           </header>
+          <section>
+            <h2>Jump into a Category</h2>
+            <div>
+              <Category />
+            </div>
+          </section>
+
           <section>
             {subItems.map((item => (
                 <div className={styles.sub_item} key={item.id} onClick={() => eventFunction(item)}>
