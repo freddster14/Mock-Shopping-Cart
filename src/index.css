@@ -1,5 +1,15 @@
+@font-face {
+  font-family:  'amazon-ember-regular';
+  src: url(./assets/Ember/AmazonEmber_Rg.ttf);
+}
+
+@font-face {
+  font-family: 'amazon-ember-bold';
+  src: url(./assets/Ember/AmazonEmber_Bd.ttf);
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'amazon-ember-regular', Inter, system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -20,14 +30,16 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  max-width: 2000px;
 }
 
 h1 {
   font-size: 3.2em;
+  font-family: 'amazon-ember-bold';
   line-height: 1.1;
 }
 

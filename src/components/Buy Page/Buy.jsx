@@ -10,7 +10,6 @@ function Buy({
     setCart,
 }) {
   const [quantity, setQuantity] = useState({value: 1})
-  
   return (
       <>
         <img src={item.image} alt={item.title} />

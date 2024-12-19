@@ -3,6 +3,7 @@ nav {
     height: 75px;
     align-items: center;
     position: sticky;
+    z-index: 3;
     top: 0px;
     padding: 0px 25px;
     justify-content: space-between;

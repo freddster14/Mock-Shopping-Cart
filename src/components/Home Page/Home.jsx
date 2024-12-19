@@ -34,6 +34,7 @@ function Home() {
             })
             .catch(err => console.log(err))
     }, [location, setFeatureItems, data])
+    console.log(data)
     return (
         <>
          <NavBar/>

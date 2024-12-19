@@ -7,7 +7,7 @@ function NavBar() {
         <>
           <nav>
               <h1
-              onClick={() => navigate('/home')} 
+              onClick={() => navigate('/')} 
               className={styles.title}>
               Title</h1>
               <div className={styles.link_container}>

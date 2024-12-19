@@ -4,7 +4,7 @@ function Error() {
  return (
     <>
       <h1>Error</h1>
-      <Link to="/home">Go Back Home</Link>
+      <Link to="/">Go Back Home</Link>
     </>
  )
 }
