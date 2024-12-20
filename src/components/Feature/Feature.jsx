@@ -33,7 +33,6 @@ function Feature ({ data, setSelectedItem }) {
     }
     console.log("ran")
 
-      if(!data) return
     return (
       <FeatureContent 
       heroItem={featureItems[0]}
@@ -60,9 +59,10 @@ function FeatureContent ({
     setSelectedItem(item)
     navigate('/buy')
   }
+
     return (
         <>
-          {heroItem ? <Loading styleName={styles.header}/> : 
+          {!heroItem ? <Loading styleName={styles.header}/> : 
           <header className={styles.header}>
               <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
                   <div className={styles.image_container}>
@@ -81,6 +81,9 @@ function FeatureContent ({
               <Category />
             </div>
           </section>
+          {!subItems ? <Loading styleName={styles.sub_items_load}/>
+          :
+          
           <section>
             <h2>Hottest Items</h2>
             <div className={styles.sub_items}>
@@ -98,6 +101,7 @@ function FeatureContent ({
             </div>
             
           </section>
+          }
         </>
       )
 }

@@ -1,5 +1,5 @@
-function Loading() {
-    return <h1>Loading...</h1>
+function Loading({ styleName }) {
+    return <div id="loading" className={styleName}></div>
 }
 
 
