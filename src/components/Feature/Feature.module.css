@@ -1,52 +1,54 @@
 .header {
-    width: 100%;
     font-family: 'amazon-ember-bold';
     margin-top: 15px;
+    width: 98%;
+    height: 60vh;
+    margin: 0px auto;
+    margin-top: 15px;
+    cursor: pointer;
 }
 .hero_item {
-    width: 98%;
-    margin: 0px auto;
     display: flex;
     align-items: center;
     text-align: center;
     overflow: hidden;
     border: rgb(255, 255, 255) solid 2px;
     border-radius: 20px;
-    cursor: pointer;
 }
 
 
 .image_container {
-    background-color: white;
-    max-height: 60vh;
     width: 55%;
+    border-right: 7px solid rgba(41,75,78,1);
+    height: 60vh;
     display: flex;
+    background-color: white;
     justify-content: center;
     align-items: center;
 }
 
 .hero_item img {
-    max-width: 100%;
-    max-height: 60vh;
-    background-color: white;
-    transition: transform 0.5s ease-in-out;
+    max-width: 95%;
+    max-height: 59vh;
+    transition: transform 0.3s ease-in-out;
 }
 
 .hero_item img:hover {
     transform: scale(0.9);
 }
 
-
 .hero_item_info {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 30px;
     font-size: 1.5em;
     width: 50%;
 }
 
 .hero_item h2 {
+    margin: 10px;
     font-size: 2.3em;
     transition: transform 0.3s ease-in-out;
 }
@@ -57,7 +59,7 @@
 
 .hero_item_info h3, .hero_item_info p {
     margin: 0;
-    width: 80%;
+    width: 85%;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -88,6 +90,7 @@
     border: rgb(255, 255, 255) solid 2px;
     border-radius: 20px;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
 }
 
 .sub_image_container {
@@ -99,13 +102,28 @@
     background-color: white;
 }
 
+.sub_item:hover {
+    transform: scale(1.1);
+}
+
 .sub_image_container img{
     max-height: 20vh;
+   max-width: 100%;
 }
 .sub_item_info {
     width: 50%;
 }
 
+.sub_item_info h3 {
+    font-size: 1.2em;
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.sub_item_info p {
+    font-size: 1.3em;
+}
 
 
 

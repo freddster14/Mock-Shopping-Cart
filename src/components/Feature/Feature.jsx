@@ -1,17 +1,39 @@
 import Loading from "../Route/Loading"
 import Category from "./Category"
+import { useLocalStorage } from "../../LocalStorage"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
-function Feature ({ 
-  featureItems,  
-  setSelectedItem 
-}) {
+function Feature ({ data, setSelectedItem }) {
+  const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
+  const [refresh, setRefresh] = useState(false);
 
-    if (!featureItems) {
-      return (<Loading />)
+  function randomIndex(array) {
+    let indexArray = []
+    let subArray = []
+    while(indexArray.length !== 4 ) {
+        let index = Math.floor(Math.random() * array.length)
+        if(!indexArray.includes(array[index])) indexArray.push(array[index]);
     }
+    subArray = indexArray.slice(1)
+    setFeatureItems([indexArray[0], subArray])
+}
+
+
+    if (!data && featureItems && !refresh) {
+      setFeatureItems([])
+      setRefresh(true);
+    } else if(!featureItems) {
+      randomIndex(data)
+    } else if(refresh && data) {
+      randomIndex(data)
+      setRefresh(false)
+    }
+    console.log("ran")
+
+      if(!data) return
     return (
       <FeatureContent 
       heroItem={featureItems[0]}
@@ -22,9 +44,8 @@ function Feature ({
 }
 
 Feature.propTypes = {
-    items: PropTypes.array,
-    featureItems: PropTypes.array,
-    setSelectedItem: PropTypes.func
+    data: PropTypes.array,
+    setSelectedItem: PropTypes.func,
 }
 
 function FeatureContent ({
@@ -41,6 +62,7 @@ function FeatureContent ({
   }
     return (
         <>
+          {heroItem ? <Loading styleName={styles.header}/> : 
           <header className={styles.header}>
               <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
                   <div className={styles.image_container}>
@@ -52,7 +74,7 @@ function FeatureContent ({
                     <p>${heroItem.price}</p>
                   </div>
               </div>
-          </header>
+          </header>}
           <section>
             <h2>Jump into a Category</h2>
             <div>

@@ -3,17 +3,15 @@ import Feature from "../Feature/Feature";
 import { useState, useEffect } from "react";
 import Products from '../Products/Products'
 import Buy from "../Buy Page/Buy"
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useLocalStorage } from "../../LocalStorage";
 
 function Home() {
     const { name } = useParams()
-    const location = useLocation()
     const [data, setData] = useState()
     const [cart, setCart] = useLocalStorage("cart", []);
     const [selectedItem, setSelectedItem] = useLocalStorage("selectedItem", "");
-    const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
     
     useEffect(() => {
         if(data) return
@@ -27,13 +25,10 @@ function Home() {
             .then( json => {
                 setData(json)
                 //resets feature items only on home screen
-                if(location.pathname === '/') {
-                    const randomItems = randomIndex(json)
-                    setFeatureItems(randomItems)
-                }
+                
             })
             .catch(err => console.log(err))
-    }, [location, setFeatureItems, data])
+    }, [data])
     console.log(data)
     return (
         <>
@@ -53,22 +48,14 @@ function Home() {
             cart={cart} 
             setCart={setCart} />
           : <Feature 
-            featureItems={featureItems}
-            setSelectedItem={setSelectedItem} />
+            data={data}
+            setSelectedItem={setSelectedItem}
+            />
          }
         </>
     )
 }
 
-function randomIndex(array) {
-    let indexArray = []
-    let subArray = []
-    while(indexArray.length !== 4 ) {
-        let index = Math.floor(Math.random() * array.length)
-        if(!indexArray.includes(array[index])) indexArray.push(array[index]);
-    }
-    subArray = indexArray.slice(1)
-    return [indexArray[0], subArray]
-}
+
 
 export default Home
