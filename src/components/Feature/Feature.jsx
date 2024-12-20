@@ -4,11 +4,10 @@ import { useLocalStorage } from "../../LocalStorage"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function Feature ({ data, setSelectedItem }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
-  const [refresh, setRefresh] = useState(false);
 
   function randomIndex(array) {
     let indexArray = []
@@ -21,18 +20,18 @@ function Feature ({ data, setSelectedItem }) {
     setFeatureItems([indexArray[0], subArray])
 }
 
-
-    if (!data && featureItems && !refresh) {
-      setFeatureItems([])
-      setRefresh(true);
-    } else if(!featureItems) {
-      randomIndex(data)
-    } else if(refresh && data) {
-      randomIndex(data)
-      setRefresh(false)
+  useEffect(() => {
+    const event = () => {
+      setFeatureItems('')
     }
-    console.log("ran")
+    window.addEventListener('beforeunload', event)
+    return () => {
+      window.removeEventListener('beforeunload', event)
+    }
+  },[setFeatureItems])
 
+  
+  if(!featureItems && data) randomIndex(data)
     return (
       <FeatureContent 
       heroItem={featureItems[0]}

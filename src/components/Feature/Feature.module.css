@@ -127,6 +127,7 @@
 }
 
 .sub_item_info p {
+    margin: 10px;
     font-size: 1.3em;
 }
 
