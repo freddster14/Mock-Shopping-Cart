@@ -9,6 +9,7 @@
 }
 .hero_item {
     display: flex;
+    width: 100%;
     align-items: center;
     text-align: center;
     overflow: hidden;
@@ -73,7 +74,9 @@
 
 .sub_items {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 40%);
+    width: 98%;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(0px, 500px));
     justify-content: space-evenly;
     gap: 30px;
 }
@@ -105,6 +108,7 @@
     align-items: center;
     justify-content: center;
     background-color: white;
+    border-right: 5px solid rgba(41,75,78,1);
 }
 
 .sub_item:hover {
@@ -113,7 +117,7 @@
 
 .sub_image_container img{
     max-height: 20vh;
-   max-width: 100%;
+    max-width: 90%;
 }
 .sub_item_info {
     width: 50%;

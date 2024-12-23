@@ -4,15 +4,17 @@ import { useLocalStorage } from "../../LocalStorage"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 function Feature ({ data, setSelectedItem }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
 
   function randomIndex(array) {
+    if(!array) return
     let indexArray = []
     let subArray = []
-    while(indexArray.length !== 4 ) {
+    //Card items append
+    while(indexArray.length !== 5 ) {
         let index = Math.floor(Math.random() * array.length)
         if(!indexArray.includes(array[index])) indexArray.push(array[index]);
     }
@@ -30,14 +32,15 @@ function Feature ({ data, setSelectedItem }) {
     }
   },[setFeatureItems])
 
-  
-  if(!featureItems && data) randomIndex(data)
+  if(!featureItems) randomIndex(data)
+
     return (
       <FeatureContent 
       heroItem={featureItems[0]}
       subItems={featureItems[1]}
-      setSelectedItem={setSelectedItem}
-      />
+      setSelectedItem={setSelectedItem}>
+        <Category data={data} />
+      </FeatureContent>
     )
 }
 
@@ -50,15 +53,14 @@ function FeatureContent ({
     heroItem,
     subItems,
     setSelectedItem,
+    children,
 }) {
 
   const navigate = useNavigate();
-
   function eventFunction(item) {
     setSelectedItem(item)
     navigate('/buy')
   }
-
     return (
         <>
           {!heroItem ? <Loading styleName={styles.header}/> : 
@@ -77,13 +79,11 @@ function FeatureContent ({
           <section>
             <h2>Jump into a Category</h2>
             <div>
-              <Category />
+              {children}
             </div>
           </section>
           {!subItems ? <Loading styleName={styles.sub_items_load}/>
-          :
-          
-          <section>
+          :<section>
             <h2>Hottest Items</h2>
             <div className={styles.sub_items}>
             {subItems.map((item => (
@@ -98,7 +98,6 @@ function FeatureContent ({
                 </div>
             )))}
             </div>
-            
           </section>
           }
         </>
@@ -123,8 +122,5 @@ FeatureContent.propTypes = {
     })),
     setSelectedItem: PropTypes.func,
 }
-
-
-
 
 export default Feature
