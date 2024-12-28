@@ -1,0 +1,28 @@
+.categories {
+    width: 98%;
+    min-height: 300px;
+    margin: 0 auto;
+    display: grid;
+    column-gap: 20px;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fit, minmax(0px, 200px));
+}
+
+.category {
+    text-align: center;
+}
+
+.image_container {
+    background-color: white;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border-radius: 100%;
+}
+
+.image {
+    max-width: 70%;
+    max-height: 70%;
+}

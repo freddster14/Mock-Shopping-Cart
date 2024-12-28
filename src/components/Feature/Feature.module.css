@@ -76,7 +76,7 @@
     display: grid;
     width: 98%;
     margin: 0 auto;
-    grid-template-columns: repeat(auto-fill, minmax(0px, 500px));
+    grid-template-columns: repeat(auto-fit, minmax(0px, 500px));
     justify-content: space-evenly;
     gap: 30px;
 }

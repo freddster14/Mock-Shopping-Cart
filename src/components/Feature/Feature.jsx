@@ -9,9 +9,15 @@ import { useEffect } from "react"
 function Feature ({ data, setSelectedItem }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
 
+  useEffect(() => {
+    if(!data) {
+      setFeatureItems('')
+    }
+  },[data, setFeatureItems])
+
   function randomIndex(array) {
-    if(!array) return
-    let indexArray = []
+    if(array && !featureItems) {
+      let indexArray = []
     let subArray = []
     //Card items append
     while(indexArray.length !== 5 ) {
@@ -20,19 +26,11 @@ function Feature ({ data, setSelectedItem }) {
     }
     subArray = indexArray.slice(1)
     setFeatureItems([indexArray[0], subArray])
-}
-
-  useEffect(() => {
-    const event = () => {
-      setFeatureItems('')
     }
-    window.addEventListener('beforeunload', event)
-    return () => {
-      window.removeEventListener('beforeunload', event)
-    }
-  },[setFeatureItems])
-
-  if(!featureItems) randomIndex(data)
+    
+  }
+  
+  randomIndex(data)
 
     return (
       <FeatureContent 
@@ -78,9 +76,7 @@ function FeatureContent ({
           </header>}
           <section>
             <h2>Jump into a Category</h2>
-            <div>
               {children}
-            </div>
           </section>
           {!subItems ? <Loading styleName={styles.sub_items_load}/>
           :<section>
