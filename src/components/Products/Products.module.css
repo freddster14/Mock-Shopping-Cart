@@ -1,0 +1,40 @@
+:root {
+    --product-size: 300px;
+}
+
+.items_container{
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: center;
+    margin: 65px auto 0 auto;
+    width: 98%;
+    gap: 30px
+}
+
+.item_container{
+    width: 30%;
+    min-width: 300px;
+    column-gap: 20px;
+    row-gap: 30px;
+}
+
+.image_container {
+    width: var(--product-size);
+    height: var(--product-size);
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+.image {
+    max-width: 90%;
+    max-height: 95%;
+}
+
+.title, .rating {
+    margin: 0;
+    font-size: 1.7em;
+}

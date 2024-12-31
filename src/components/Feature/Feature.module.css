@@ -31,7 +31,7 @@
 .hero_item img {
     max-width: 95%;
     max-height: 59vh;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .hero_item img:hover {
@@ -51,7 +51,6 @@
 .hero_item h2 {
     margin: 10px;
     font-size: 2.3em;
-    transition: transform 0.3s ease-in-out;
 }
 
 .hero_item_info p{
@@ -60,23 +59,19 @@
 
 .hero_item_info h3, .hero_item_info p {
     margin: 0;
-    width: 85%;
-    transition: transform 0.3s ease-in-out;
+    max-width: 85%;
 }
 
-.hero_item_info p:hover, .hero_item_info h2:hover {
-    transform: scale(1.2);
+.hero_item_info p:hover, .hero_item_info h2:hover, .hero_item_info h3:hover {
+    text-decoration: underline;
 }
 
-.hero_item_info h3:hover {
-    transform: scale(1.1);
-}
 
 .sub_items {
     display: grid;
     width: 98%;
     margin: 0 auto;
-    grid-template-columns: repeat(auto-fit, minmax(0px, 500px));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 40%));
     justify-content: space-evenly;
     gap: 30px;
 }
@@ -89,6 +84,7 @@
 .sub_item{
     width: 100%;
     height: 20vh;
+    min-height: 250px;
     margin: 0px auto;
     display: flex;
     align-items: center;
@@ -98,7 +94,6 @@
     border: rgb(255, 255, 255) solid 2px;
     border-radius: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
 }
 
 .sub_image_container {
@@ -112,7 +107,7 @@
 }
 
 .sub_item:hover {
-    transform: scale(1.1);
+    text-decoration: underline;
 }
 
 .sub_image_container img{

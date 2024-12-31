@@ -78,10 +78,11 @@ function FeatureContent ({
             <h2>Jump into a Category</h2>
               {children}
           </section>
-          {!subItems ? <Loading styleName={styles.sub_items_load}/>
-          :<section>
+          <section>          
             <h2>Hottest Items</h2>
-            <div className={styles.sub_items}>
+         
+          {!subItems ? <Loading styleName={styles.sub_items_load}/>
+          : <div className={styles.sub_items}>
             {subItems.map((item => (
                 <div className={styles.sub_item} key={item.id} onClick={() => eventFunction(item)}>
                   <div className={styles.sub_image_container}>
@@ -94,8 +95,8 @@ function FeatureContent ({
                 </div>
             )))}
             </div>
-          </section>
           }
+          </section>
         </>
       )
 }
@@ -117,6 +118,7 @@ FeatureContent.propTypes = {
         image: PropTypes.string,
     })),
     setSelectedItem: PropTypes.func,
+    children: PropTypes.element
 }
 
 export default Feature
