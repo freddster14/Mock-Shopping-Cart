@@ -5,7 +5,7 @@ function NavBar() {
     const navigate = useNavigate()    
     return (
         <>
-          <nav>
+          <nav className={styles.nav}>
               <h1
               onClick={() => navigate('/')} 
               className={styles.title}>
