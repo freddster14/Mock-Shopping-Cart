@@ -16,6 +16,7 @@ function Products({ items, setSelectedItem }) {
     }
 
     function sortByCategory(category) {
+      if(!category) return setCategoryItems();
       setCategoryItems(categoryData[category])
     }
 
@@ -28,6 +29,7 @@ function Products({ items, setSelectedItem }) {
            <button key={category} onClick={() => sortByCategory(category)}>{category}</button>
           )
         })}
+          <button onClick={() => sortByCategory()}>All</button>
         </nav>
 
         { !categoryItems 
@@ -48,6 +50,7 @@ Products.propTypes = {
         description: PropTypes.string,
         image: PropTypes.string,  
     })),
+    setSelectedItem: PropTypes.func,
 }
 
 function DisplayItems({ items, eventFunction }) {
