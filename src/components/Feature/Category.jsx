@@ -3,6 +3,7 @@ import { useLocalStorage } from "../../LocalStorage"
 import Loading from "../Route/Loading"
 import styles from './Category.module.css'
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function capitalizeFirstWord(str) {
     if(!str) return "";
@@ -13,7 +14,8 @@ export function capitalizeFirstWord(str) {
 
 export function Category({ data }) {
     const [categoryData, setCategoryData] = useLocalStorage("category", "")
-    
+    const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
+    const navigate = useNavigate();
     useEffect(() => {
         if(!data) setCategoryData("")
     }, [data, setCategoryData])
@@ -31,6 +33,10 @@ export function Category({ data }) {
         setCategoryData(newObj)
         } 
     }
+    function jumpToCategory(category) {
+        setDisplayItems(categoryData[category]);
+        navigate('products')
+    }
 
     categorizeData(data)
     if(!categoryData) return <Loading styleName={styles.categories}/>
@@ -38,7 +44,7 @@ export function Category({ data }) {
     return (
         <div className={styles.categories}>
             {Object.keys(categoryData).map(category => (
-                <div key={category} className={styles.category}>
+                <div key={category} className={styles.category} onClick={() => jumpToCategory(category)}>
                     <h2>{capitalizeFirstWord(category)}</h2>
                     <div className={styles.image_container}>
                         <img 

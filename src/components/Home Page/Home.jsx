@@ -12,24 +12,26 @@ function Home() {
     const [data, setData] = useState()
     const [cart, setCart] = useLocalStorage("cart", []);
     const [selectedItem, setSelectedItem] = useLocalStorage("selectedItem", "");
-    
+
     useEffect(() => {
         if(data) return
         fetch('https://fakestoreapi.com/products', { mode: 'cors' })
-            .then( res=> {
-                if(res.status >= 400){
-                    throw new Error("Load Failed")
+            .then(res => {
+                if(!res.ok){
+                  throw new Error("Server Error")
                 }
                 return res.json()
             })
-            .then( json => {
+            .then(json => {
                 setData(json)
                 //resets feature items only on home screen
-                
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+              setData("error")
+              console.error(err)
+            })
     }, [data])
-    console.log(data)
+    if(data === "error") throw new Error("Failed to get Information")
     return (
         <>
          <NavBar/>
