@@ -4,14 +4,14 @@ import Loading from "../Route/Loading"
 import styles from './Category.module.css'
 import { useEffect } from "react";
 
-function capitalizeFirstWord(str) {
+export function capitalizeFirstWord(str) {
     if(!str) return "";
     const words = str.split("");
     words[0] = words[0].toUpperCase()
     return words.join("");
 }
 
-export default function Category({ data }) {
+export function Category({ data }) {
     const [categoryData, setCategoryData] = useLocalStorage("category", "")
     
     useEffect(() => {

@@ -1,44 +1,84 @@
 import PropTypes from "prop-types"
 import Loading from "../Route/Loading"
 import styles from "./Products.module.css"
+import { capitalizeFirstWord } from "../Feature/Category"
 import { useLocalStorage } from "../../LocalStorage"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function Products({ items, setSelectedItem }) {
-    const navigate = useNavigate();
-    const [categoryData, setCategoryData] = useLocalStorage("category", "");
-    const [categoryItems, setCategoryItems] = useState()
+  const navigate = useNavigate();
+  const [categoryData, setCategoryData] = useLocalStorage("category", "");
+  const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
 
-    function eventFunction(item) {
-      setSelectedItem(item)
-      navigate('/buy')
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    })
+  }, [displayItems])
+
+  function eventFunction(item) {
+    setSelectedItem(item)
+    navigate('/buy')
+  }
+  function sortByCategory(category) {
+    const select = document.querySelector("select");
+    if(!category) {
+      return sortItems(select, items) 
+    }else if(select.value) {
+      return sortItems(select , categoryData[category])
+    } else{
+      setDisplayItems(categoryData[category])
     }
+  }
+  function sortItems(element, array = displayItems) {
+    const value = element.value;
+    console.log("ran")
+    let sortedArray = [];
+    let sortedKeys;
+    sortedKeys = Object.keys(array).sort((a,b) => {
+      switch (value) {
+        case "price-ascending":
+          return array[a].price - array[b].price; 
+        case "price-descending":
+          return array[b].price - array[a].price;
+        case "rating-ascending":
+          return array[a].rating.rate - array[b].rating.rate
+        case "rating-descending":
+          return array[b].rating.rate - array[a].rating.rate
+      } 
 
-    function sortByCategory(category) {
-      if(!category) return setCategoryItems();
-      setCategoryItems(categoryData[category])
-    }
+    })
+    sortedKeys.forEach((key, index) => sortedArray[index] = array[key])
+    setDisplayItems(sortedArray)
+  }
 
-    if(!items) return <Loading/>
-    return (
-      <>
-        <nav>
-        {Object.keys(categoryData).map(category => {
+  if(!items) return <Loading/>
+  if(!displayItems) setDisplayItems(items)
+  return (
+    <>
+      <nav className={styles.nav}>
+        <div className={styles.button_container}>
+          {Object.keys(categoryData).map(category => {
           return (
-           <button key={category} onClick={() => sortByCategory(category)}>{category}</button>
+          <button key={category} onClick={() => sortByCategory(category)}>{capitalizeFirstWord(category)}</button>
           )
-        })}
+          })}
           <button onClick={() => sortByCategory()}>All</button>
-        </nav>
-
-        { !categoryItems 
-          ? <DisplayItems items={items} eventFunction={eventFunction}/> 
-          : <DisplayItems items={categoryItems} eventFunction={eventFunction}/>
-        }
-      </>
-     
-    )
+        </div>
+        <select name="sort" id="sort" onChange={(e) => sortItems(e.target)} >
+          <option value="">Sort By</option>
+          <option value="price-ascending">Price: Ascending</option>
+          <option value="price-descending">Price: Descending</option>
+          <option value="rating-ascending">Rating: Ascending</option>
+          <option value="rating-descending">Rating: Descending</option>
+        </select>
+      </nav>
+      <DisplayItems items={displayItems} eventFunction={eventFunction}/>
+    </>
+    
+  )
 }
 
 Products.propTypes = {
@@ -64,6 +104,7 @@ function DisplayItems({ items, eventFunction }) {
                 </div>
                 <h2 className={styles.title}>{item.title}</h2>
                 <Rating itemRate={item.rating}/>
+                <p className={styles.price}>${item.price}</p>
               </li>
             ))}
           </ul>
@@ -102,7 +143,6 @@ function Rating({ itemRate }) {
       }
      
     }
-    console.log(starElements)
     return <div className={styles.rating_container}>{starElements} ({count})</div>
   }
 
@@ -111,16 +151,5 @@ function Rating({ itemRate }) {
   )
 }
 
-function Sort() {
-  const [categoryData, setCategoryData] = useLocalStorage("category", "")
- return (
-    <>
-      {categoryData.map(item => {
-        console.log(item)
-      })}
-
-    </>
- )
-}
 
 export default Products

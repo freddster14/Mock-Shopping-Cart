@@ -1,5 +1,5 @@
 import Loading from "../Route/Loading"
-import Category from "./Category"
+import { Category } from "./Category"
 import { useLocalStorage } from "../../LocalStorage"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
