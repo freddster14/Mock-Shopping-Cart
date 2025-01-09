@@ -8,6 +8,7 @@ import { useEffect } from "react"
 
 function Feature ({ data, setSelectedItem, categoryData }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
+  const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
 
   useEffect(() => {
     if(!data) {
@@ -27,17 +28,14 @@ function Feature ({ data, setSelectedItem, categoryData }) {
     subArray = indexArray.slice(1)
     setFeatureItems([indexArray[0], subArray])
     }
-    
   }
-  
   randomIndex(data)
-
     return (
       <FeatureContent 
       heroItem={featureItems[0]}
       subItems={featureItems[1]}
       setSelectedItem={setSelectedItem}>
-        <Category categoryData={categoryData} />
+        <Category categoryData={categoryData} setDisplayItems={setDisplayItems}  />
       </FeatureContent>
     )
 }

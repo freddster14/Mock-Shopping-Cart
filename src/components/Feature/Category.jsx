@@ -12,22 +12,32 @@ export function capitalizeFirstWord(str) {
     return words.join("");
 }
 
-export function Category({ categoryData }) {
-    const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
+export function Category({ categoryData, setDisplayItems }) {
     const location = useLocation();
     const navigate = useNavigate();
     const homePage = location.pathname === "/";
+
     function jumpToCategory(category) {
+        if(homePage) {
+            navigate('/products')
+        } 
         setDisplayItems(categoryData[category]);
-        navigate('products')
     }
+
     if(!categoryData) return <Loading styleName={styles.categories}/>
-    console.log(location.pathname)
     return (
         <div className={styles.categories}>
             {Object.keys(categoryData).map(category => (
-                <div key={category} className={styles.category} onClick={() => jumpToCategory(category)}>
-                    <button className={homePage ? styles.button_big : styles.button_small}>{capitalizeFirstWord(category)}</button>
+                <div 
+                key={category} 
+                className={styles.category} 
+                >
+                    <button 
+                    className={homePage ? styles.button_big : styles.button_small}
+                    onClick={() => jumpToCategory(category)}
+                    >
+                    {capitalizeFirstWord(category)}
+                    </button>
                     { homePage &&
                         <div className={styles.image_container}>
                             <img 

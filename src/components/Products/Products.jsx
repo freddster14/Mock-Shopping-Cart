@@ -1,38 +1,38 @@
 import PropTypes from "prop-types"
+import { Category } from "../Feature/Category"
 import Loading from "../Route/Loading"
 import styles from "./Products.module.css"
-import { capitalizeFirstWord } from "../Feature/Category"
 import { useLocalStorage } from "../../LocalStorage"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { setSelectionRange } from "@testing-library/user-event/dist/cjs/event/selection/setSelectionRange.js"
 
 function Products({ items, setSelectedItem, categoryData }) {
-  const navigate = useNavigate();
   const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-    })
-  }, [displayItems])
+    });
+    // Delete saved data when refreshing
+    if(!items) setDisplayItems("");
+  }, [displayItems, items, setDisplayItems])
 
   function eventFunction(item) {
     setSelectedItem(item)
     navigate('/buy')
   }
-  function sortByCategory(category) {
-    const select = document.querySelector("select");
-    if(!category) {
-      return sortItems(select, items) 
-    }else if(select.value) {
-      return sortItems(select , categoryData[category])
-    } else{
-      setDisplayItems(categoryData[category])
+  function checkSort(data) {
+    const sort = document.querySelector("select").value;
+    if(!sort) {
+      setDisplayItems(data)
+    } else {
+      sortItems(sort, data)
     }
   }
-  function sortItems(element, array = displayItems) {
-    const value = element.value;
+  function sortItems(value, array) {
     console.log("ran")
     let sortedArray = [];
     let sortedKeys;
@@ -47,7 +47,6 @@ function Products({ items, setSelectedItem, categoryData }) {
         case "rating-descending":
           return array[b].rating.rate - array[a].rating.rate
       } 
-
     })
     sortedKeys.forEach((key, index) => sortedArray[index] = array[key])
     setDisplayItems(sortedArray)
@@ -59,14 +58,10 @@ function Products({ items, setSelectedItem, categoryData }) {
     <>
       <nav className={styles.nav}>
         <div className={styles.button_container}>
-          {Object.keys(categoryData).map(category => {
-          return (
-          <button key={category} onClick={() => sortByCategory(category)}>{capitalizeFirstWord(category)}</button>
-          )
-          })}
-          <button onClick={() => sortByCategory()}>All</button>
+          <Category categoryData={categoryData} setDisplayItems={checkSort}/>
+          <button onClick={() => checkSort(items)}>All</button>
         </div>
-        <select name="sort" id="sort" onChange={(e) => sortItems(e.target)} >
+        <select name="sort" id="sort" onChange={(e) => sortItems(e.target.value, displayItems)} >
           <option value="">Sort By</option>
           <option value="price-ascending">Price: Ascending</option>
           <option value="price-descending">Price: Descending</option>
@@ -93,6 +88,7 @@ Products.propTypes = {
 }
 
 function DisplayItems({ items, eventFunction }) {
+
    return (
     <section>
           <ul className={styles.items_container}>
