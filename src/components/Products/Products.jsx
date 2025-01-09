@@ -6,9 +6,8 @@ import { useLocalStorage } from "../../LocalStorage"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-function Products({ items, setSelectedItem }) {
+function Products({ items, setSelectedItem, categoryData }) {
   const navigate = useNavigate();
-  const [categoryData, setCategoryData] = useLocalStorage("category", "");
   const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
 
   useEffect(() => {

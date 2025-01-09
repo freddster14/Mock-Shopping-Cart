@@ -6,7 +6,7 @@ import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
-function Feature ({ data, setSelectedItem }) {
+function Feature ({ data, setSelectedItem, categoryData }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function Feature ({ data, setSelectedItem }) {
       heroItem={featureItems[0]}
       subItems={featureItems[1]}
       setSelectedItem={setSelectedItem}>
-        <Category data={data} />
+        <Category categoryData={categoryData} />
       </FeatureContent>
     )
 }
