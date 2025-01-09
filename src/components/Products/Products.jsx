@@ -59,9 +59,9 @@ function Products({ items, setSelectedItem, categoryData }) {
       <nav className={styles.nav}>
         <div className={styles.button_container}>
           <Category categoryData={categoryData} setDisplayItems={checkSort}/>
-          <button onClick={() => checkSort(items)}>All</button>
+          <button className={styles.all} onClick={() => checkSort(items)}>All</button>
         </div>
-        <select name="sort" id="sort" onChange={(e) => sortItems(e.target.value, displayItems)} >
+        <select className={styles.select} name="sort" id="sort" onChange={(e) => sortItems(e.target.value, displayItems)} >
           <option value="">Sort By</option>
           <option value="price-ascending">Price: Ascending</option>
           <option value="price-descending">Price: Descending</option>

@@ -5,10 +5,12 @@
     position: sticky;
     z-index: 3;
     top: 0px;
+    font-family: 'amazon-ember-bold';
     padding: 0px 25px;
     justify-content: space-between;
     background: rgb(27,29,26);
-    background: linear-gradient(90deg, rgba(27,29,26,1) 2%, rgba(41,75,78,1) 65%, rgba(68,121,127,1) 100%);}
+    background: linear-gradient(90deg, rgba(27,29,26,1) 2%, rgba(41,75,78,1) 65%, rgba(68,121,127,1) 100%);
+}
 
 .title {
     font-size: 48px;

@@ -18,20 +18,17 @@ export function Category({ categoryData, setDisplayItems }) {
     const homePage = location.pathname === "/";
 
     function jumpToCategory(category) {
-        if(homePage) {
-            navigate('/products')
-        } 
+        if(homePage) { navigate('/products') } 
         setDisplayItems(categoryData[category]);
     }
 
     if(!categoryData) return <Loading styleName={styles.categories}/>
     return (
-        <div className={styles.categories}>
+        <div className={homePage? styles.categories : styles.small_categories}>
             {Object.keys(categoryData).map(category => (
                 <div 
                 key={category} 
-                className={styles.category} 
-                >
+                className={styles.category}>
                     <button 
                     className={homePage ? styles.button_big : styles.button_small}
                     onClick={() => jumpToCategory(category)}
