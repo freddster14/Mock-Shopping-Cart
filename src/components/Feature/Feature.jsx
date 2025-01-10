@@ -6,9 +6,9 @@ import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
-function Feature ({ data, setSelectedItem, categoryData }) {
+function Feature ({ data, setSelectedItem, categoryData, setDisplayItems }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
-  const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
+ 
 
   useEffect(() => {
     if(!data) {
@@ -35,7 +35,7 @@ function Feature ({ data, setSelectedItem, categoryData }) {
       heroItem={featureItems[0]}
       subItems={featureItems[1]}
       setSelectedItem={setSelectedItem}>
-        <Category categoryData={categoryData} setDisplayItems={setDisplayItems}  />
+        <Category categoryData={categoryData} setDisplayItems={setDisplayItems} items={data}  />
       </FeatureContent>
     )
 }

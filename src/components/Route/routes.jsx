@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Error from "./Error";
 import Home from "../Home Page/Home";
-import Buy from "../Buy Page/Buy";
+import Feature from "../Feature/Feature";
+import NavBar from "../Nav Bar/NavBar";
+import Products from "../Products/Products";
 
 const router = createBrowserRouter([
     {
@@ -10,11 +12,18 @@ const router = createBrowserRouter([
       errorElement: <Error />,
       children: [
         {
-          path: "/:name",
-          element: <Buy />
+          path: ":name",
+          element: <NavBar />,
+          children: [
+            {
+              path: ":category",
+              element: <Products />
+            }
+          ]
         }
       ]
     },
+   
 ])
 
 export default router

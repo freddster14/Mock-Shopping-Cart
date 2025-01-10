@@ -2,74 +2,43 @@ import PropTypes from "prop-types"
 import { Category } from "../Feature/Category"
 import Loading from "../Route/Loading"
 import styles from "./Products.module.css"
-import { useLocalStorage } from "../../LocalStorage"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { setSelectionRange } from "@testing-library/user-event/dist/cjs/event/selection/setSelectionRange.js"
 
-function Products({ items, setSelectedItem, categoryData }) {
-  const [displayItems, setDisplayItems] = useLocalStorage("displayItems", "");
+function Products({ 
+  items, 
+  setSelectedItem, 
+  categoryData,
+}) {
+  const { category } = useParams()
   const navigate = useNavigate();
-
+  const [displayItems, setDisplayItems] = useState();
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
     });
-    // Delete saved data when refreshing
-    if(!items) setDisplayItems("");
-  }, [displayItems, items, setDisplayItems])
+  }, [category, displayItems])
 
   function eventFunction(item) {
     setSelectedItem(item)
     navigate('/buy')
   }
-  function checkSort(data) {
-    const sort = document.querySelector("select").value;
-    if(!sort) {
-      setDisplayItems(data)
-    } else {
-      sortItems(sort, data)
-    }
-  }
-  function sortItems(value, array) {
-    console.log("ran")
-    let sortedArray = [];
-    let sortedKeys;
-    sortedKeys = Object.keys(array).sort((a,b) => {
-      switch (value) {
-        case "price-ascending":
-          return array[a].price - array[b].price; 
-        case "price-descending":
-          return array[b].price - array[a].price;
-        case "rating-ascending":
-          return array[a].rating.rate - array[b].rating.rate
-        case "rating-descending":
-          return array[b].rating.rate - array[a].rating.rate
-      } 
-    })
-    sortedKeys.forEach((key, index) => sortedArray[index] = array[key])
-    setDisplayItems(sortedArray)
-  }
-
+ 
+  
   if(!items) return <Loading/>
-  if(!displayItems) setDisplayItems(items)
+  if(!displayItems && !category) {
+    setDisplayItems(items)
+  } else if(!displayItems && category) {
+    setDisplayItems(categoryData[category])
+  }
+  console.log("ran")
   return (
     <>
       <nav className={styles.nav}>
-        <div className={styles.button_container}>
-          <Category categoryData={categoryData} setDisplayItems={checkSort}/>
-          <button className={styles.all} onClick={() => checkSort(items)}>All</button>
-        </div>
-        <select className={styles.select} name="sort" id="sort" onChange={(e) => sortItems(e.target.value, displayItems)} >
-          <option value="">Sort By</option>
-          <option value="price-ascending">Price: Ascending</option>
-          <option value="price-descending">Price: Descending</option>
-          <option value="rating-ascending">Rating: Ascending</option>
-          <option value="rating-descending">Rating: Descending</option>
-        </select>
+        <Category categoryData={categoryData} setDisplayItems={setDisplayItems} items={items}/>
       </nav>
-      <DisplayItems items={displayItems} eventFunction={eventFunction}/>
+      <DisplayItems displayItems={displayItems} eventFunction={eventFunction}/>
     </>
     
   )
@@ -87,12 +56,11 @@ Products.propTypes = {
     setSelectedItem: PropTypes.func,
 }
 
-function DisplayItems({ items, eventFunction }) {
-
+function DisplayItems({ displayItems, eventFunction }) {
    return (
     <section>
           <ul className={styles.items_container}>
-            {items.map((item) => (
+            {displayItems.map((item) => (
               <li key={item.id} className={styles.item_container} onClick={() => eventFunction(item)}>
                 <div className={styles.image_container}>
                   <img src={item.image} alt={item.title} className={styles.image} />
@@ -124,16 +92,16 @@ function Rating({ itemRate }) {
     for(let i = 0; i < 5; i++) {
       if(stars > i) {
         starElements.push(
-          <img key={i} src="src/assets/fullstar.png" alt="Star" className={styles.star}/>
+          <img key={i} src="/src/assets/fullstar.png" alt="Star" className={styles.star}/>
         )
       } else if(halfStar) {
         starElements.push(
-          <img key={i} src="src/assets/halfstar.png" alt="Half Star" className={styles.star}/>
+          <img key={i} src="/src/assets/halfstar.png" alt="Half Star" className={styles.star}/>
         )
         halfStar = false
       } else {
         starElements.push(
-          <img key={i} src="src/assets/emptystar.png" alt="Empty Star" className={styles.star}/>
+          <img key={i} src="/src/assets/emptystar.png" alt="Empty Star" className={styles.star}/>
         )
       }
      
