@@ -65,13 +65,3 @@
     max-height: 80%;
 }
 
-.select {
-    background-color: rgb(27, 29, 26);
-    color: inherit;
-    font-size: 1em;
-    border-radius: 3px;
-    outline: none;
-    font-family: 'amazon-ember-bold';
-    padding: 5px 1px;
-    margin-left: auto;
-}
