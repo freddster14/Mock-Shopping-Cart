@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import { Category } from "../Feature/Category"
 import Loading from "../Route/Loading"
 import styles from "./Products.module.css"
-import { NavLink, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 function Products({ 
@@ -11,34 +11,62 @@ function Products({
   categoryData,
 }) {
   const { category } = useParams()
-  const navigate = useNavigate();
   const [displayItems, setDisplayItems] = useState();
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-    });
-  }, [category, displayItems])
+  const [sortValue, setSortValue]= useState()
 
-  function eventFunction(item) {
-    setSelectedItem(item)
-    navigate('/buy')
-  }
+  useEffect(() => {
+    if (category && items) {
+      const selectedCategoryItems = categoryData[category];
+      if(!sortValue) return setDisplayItems(selectedCategoryItems);
+      console.log("ran")
+      sortItems(sortValue, selectedCategoryItems)
+    } else {
+      if(!sortValue) return  setDisplayItems(items);
+      sortItems(sortValue, items)  
+    }
+  }, [category, categoryData, items, sortValue]); 
+
  
-  
+  function sortItems(value, array) {
+      
+    const sortedArray = [...array].sort((a,b) => {
+    switch (value) {
+        case "price-ascending":
+        return  a.price - b.price; 
+        case "price-descending":
+        return b.price - a.price;
+        case "rating-ascending":
+        return a.rating.rate - b.rating.rate
+        case "rating-descending":
+        return b.rating.rate - a.rating.rate
+    }})
+    setDisplayItems(sortedArray)
+}
+function handleSortChange(value) {
+  setSortValue(value);
+  sortItems(value, displayItems)
+}
+ 
   if(!items) return <Loading/>
+  //Set Initial items
   if(!displayItems && !category) {
     setDisplayItems(items)
   } else if(!displayItems && category) {
     setDisplayItems(categoryData[category])
   }
-  console.log("ran")
   return (
     <>
       <nav className={styles.nav}>
         <Category categoryData={categoryData} setDisplayItems={setDisplayItems} items={items}/>
+        <select className={styles.select} name="sort" id="sort" onChange={(e) => handleSortChange(e.target.value)} >
+          <option value="">Sort By</option>
+          <option value="price-ascending">Price: Ascending</option>
+          <option value="price-descending">Price: Descending</option>
+          <option value="rating-ascending">Rating: Ascending</option>
+          <option value="rating-descending">Rating: Descending</option>
+        </select>
       </nav>
-      <DisplayItems displayItems={displayItems} eventFunction={eventFunction}/>
+      <DisplayItems displayItems={displayItems} setSelectedItem={setSelectedItem}/>
     </>
     
   )
@@ -56,7 +84,14 @@ Products.propTypes = {
     setSelectedItem: PropTypes.func,
 }
 
-function DisplayItems({ displayItems, eventFunction }) {
+function DisplayItems({ displayItems, setSelectedItem }) {
+  const navigate = useNavigate();
+
+
+  function eventFunction(item) {
+    setSelectedItem(item);
+    navigate("/buy")
+  }
    return (
     <section>
           <ul className={styles.items_container}>
