@@ -18,13 +18,13 @@ function NavBar() {
                   Home
                 </NavLink>
                 <NavLink 
-                  to="/products"  
+                  to="products" 
                   className={({isActive}) => 
-                  isActive ? (styles.link_active) : ""}>
+                  isActive ? (styles.link_active) : ""} >
                   Products
                 </NavLink>
                 <NavLink 
-                  to="/cart"  
+                  to="cart"  
                   className={({isActive}) =>
                   isActive ? styles.link_active : ""}>
                   Cart
