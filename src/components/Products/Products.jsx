@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { Category } from "../Feature/Category"
+import  Category  from "../Feature/Category"
 import Loading from "../Route/Loading"
 import styles from "./Products.module.css"
 import { useNavigate, useParams } from "react-router-dom"
@@ -26,11 +26,9 @@ function Products({
     }
   }, [category, categoryData, items, sortValue]); 
 
- 
   function sortItems(value, array) {
-      
     const sortedArray = [...array].sort((a,b) => {
-    switch (value) {
+      switch (value) {
         case "price-ascending":
         return  a.price - b.price; 
         case "price-descending":
@@ -39,13 +37,15 @@ function Products({
         return a.rating.rate - b.rating.rate
         case "rating-descending":
         return b.rating.rate - a.rating.rate
-    }})
+      }
+    })
     setDisplayItems(sortedArray)
-}
-function handleSortChange(value) {
-  setSortValue(value);
-  sortItems(value, displayItems)
-}
+  }
+
+  function handleSortChange(value) {
+    setSortValue(value);
+    sortItems(value, displayItems)
+  }
  
   if(!items) return <Loading/>
   //Set Initial items
@@ -68,7 +68,6 @@ function handleSortChange(value) {
       </nav>
       <DisplayItems displayItems={displayItems} setSelectedItem={setSelectedItem}/>
     </>
-    
   )
 }
 
@@ -82,35 +81,38 @@ Products.propTypes = {
         image: PropTypes.string,  
     })),
     setSelectedItem: PropTypes.func,
+    categoryData: PropTypes.object,
 }
 
 function DisplayItems({ displayItems, setSelectedItem }) {
   const navigate = useNavigate();
 
-
   function eventFunction(item) {
     setSelectedItem(item);
     navigate("/buy")
   }
-   return (
-    <section>
-          <ul className={styles.items_container}>
-            {displayItems.map((item) => (
-              <li key={item.id} className={styles.item_container} onClick={() => eventFunction(item)}>
-                <div className={styles.image_container}>
-                  <img src={item.image} alt={item.title} className={styles.image} />
-                </div>
-                <h2 className={styles.title}>{item.title}</h2>
-                <Rating itemRate={item.rating}/>
-                <p className={styles.price}>${item.price}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-   )
+  return (
+  <section>
+    <ul className={styles.items_container}>
+      {displayItems.map((item) => (
+        <li key={item.id} className={styles.item_container} onClick={() => eventFunction(item)}>
+          <div className={styles.image_container}>
+            <img src={item.image} alt={item.title} className={styles.image} />
+          </div>
+          <h2 className={styles.title}>{item.title}</h2>
+          <Rating itemRate={item.rating}/>
+          <p className={styles.price}>${item.price}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+  )
 }
 
-
+DisplayItems.propTypes = {
+  displayItems: PropTypes.array,
+  setSelectedItem: PropTypes.func,
+}
 
 function Rating({ itemRate }) {
   const {rate, count} = itemRate;
@@ -139,15 +141,11 @@ function Rating({ itemRate }) {
           <img key={i} src="/src/assets/emptystar.png" alt="Empty Star" className={styles.star}/>
         )
       }
-     
     }
     return <div className={styles.rating_container}>{starElements} ({count})</div>
   }
 
-  return (
-    setStars(starCount)
-  )
+  return (setStars(starCount))
 }
-
 
 export default Products

@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Error from "./Error";
 import Home from "../Home Page/Home";
-import Feature from "../Feature/Feature";
 import NavBar from "../Nav Bar/NavBar";
 import Products from "../Products/Products";
 

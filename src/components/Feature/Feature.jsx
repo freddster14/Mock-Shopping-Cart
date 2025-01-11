@@ -1,15 +1,13 @@
 import Loading from "../Route/Loading"
-import { Category } from "./Category"
+import  Category  from "./Category"
 import { useLocalStorage } from "../../LocalStorage"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
-function Feature ({ data, setSelectedItem, categoryData, setDisplayItems }) {
+function Feature ({ data, setSelectedItem, categoryData, }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
- 
-
   useEffect(() => {
     if(!data) {
       setFeatureItems('')
@@ -30,19 +28,20 @@ function Feature ({ data, setSelectedItem, categoryData, setDisplayItems }) {
     }
   }
   randomIndex(data)
-    return (
-      <FeatureContent 
-      heroItem={featureItems[0]}
-      subItems={featureItems[1]}
-      setSelectedItem={setSelectedItem}>
-        <Category categoryData={categoryData} setDisplayItems={setDisplayItems} items={data}  />
-      </FeatureContent>
-    )
+  return (
+    <FeatureContent 
+    heroItem={featureItems[0]}
+    subItems={featureItems[1]}
+    setSelectedItem={setSelectedItem}>
+      <Category categoryData={categoryData} />
+    </FeatureContent>
+  )
 }
 
 Feature.propTypes = {
     data: PropTypes.array,
     setSelectedItem: PropTypes.func,
+    categoryData: PropTypes.object,
 }
 
 function FeatureContent ({
@@ -57,30 +56,30 @@ function FeatureContent ({
     setSelectedItem(item)
     navigate('/buy')
   }
-    return (
-        <>
-          {!heroItem ? <Loading styleName={styles.header}/> : 
-          <header className={styles.header}>
-              <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
-                  <div className={styles.image_container}>
-                    <img src={heroItem.image} alt={heroItem.title} />
-                  </div>
-                  <div className={styles.hero_item_info}>
-                    <h2 className={styles.hero_item_title}>Latest Drop</h2>
-                    <h3>{heroItem.title}</h3>
-                    <p>${heroItem.price}</p>
-                  </div>
-              </div>
-          </header>}
-          <section>
-            <h2>Jump into a Category</h2>
-              {children}
-          </section>
-          <section>          
-            <h2>Hottest Items</h2>
-         
-          {!subItems ? <Loading styleName={styles.sub_items_load}/>
-          : <div className={styles.sub_items}>
+  return (
+    <>
+      {!heroItem ? <Loading styleName={styles.header}/> 
+      : <header className={styles.header}>
+          <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
+            <div className={styles.image_container}>
+              <img src={heroItem.image} alt={heroItem.title} />
+            </div>
+            <div className={styles.hero_item_info}>
+              <h2 className={styles.hero_item_title}>Latest Drop</h2>
+              <h3>{heroItem.title}</h3>
+              <p>${heroItem.price}</p>
+            </div>
+          </div>
+        </header>
+      }
+      <section>
+        <h2>Jump into a Category</h2>
+          {children}
+      </section>
+      <section>          
+        <h2>Hottest Items</h2>
+        {!subItems ? <Loading styleName={styles.sub_items_load}/>
+        : <div className={styles.sub_items}>
             {subItems.map((item => (
                 <div className={styles.sub_item} key={item.id} onClick={() => eventFunction(item)}>
                   <div className={styles.sub_image_container}>
@@ -92,11 +91,11 @@ function FeatureContent ({
                   </div>
                 </div>
             )))}
-            </div>
-          }
-          </section>
-        </>
-      )
+          </div>
+        }
+      </section>
+    </>
+  )
 }
 
 FeatureContent.propTypes = {
