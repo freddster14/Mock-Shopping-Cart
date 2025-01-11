@@ -62,22 +62,29 @@ export function Category({ categoryData, setDisplayItems, items }) {
                         ${homePage ? styles.button_big : styles.button_small}`
                         .trim()
                     }
-                    >{capitalizeFirstWord(category)}
+                    >   
+                        { capitalizeFirstWord(category)}
+                        { homePage &&
+                            <div className={styles.image_container}>
+                                <img 
+                                className={styles.image}
+                                src={categoryData[category][1].image} 
+                                alt={categoryData[category][1].title}
+                                />
+                            </div>
+                        }
                     </NavLink>
-                    { homePage &&
-                        <div className={styles.image_container}>
-                            <img 
-                            className={styles.image}
-                            src={categoryData[category][1].image} 
-                            alt={categoryData[category][1].title}
-                            />
-                        </div>
-                    }
                 </div>
             ))}
             { !homePage &&
             <>
-            <NavLink to="/products" onClick={() => checkSort(items)} className={homePage ? styles.button_big : styles.button_small}>All</NavLink>
+            <NavLink to="products" onClick={() => checkSort(items)} 
+            className={({ isActive }) => 
+                `${isActive ? styles.active : ""} 
+                ${homePage ? styles.button_big : styles.button_small}`
+                .trim()
+            }
+                end>All</NavLink>
             <select className={styles.select} name="sort" id="sort" onChange={(e) => sortItems(e.target.value, category ? categoryData[category] : items)} >
                 <option value="">Sort By</option>
                 <option value="price-ascending">Price: Ascending</option>

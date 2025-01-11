@@ -16,14 +16,10 @@
 .category {
     text-align: center;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out ;
 }
 
 
 
-.category:hover {
-    transform: scale(1.05);
-}
 
 .image_container {
     background-color: white;
@@ -44,6 +40,10 @@
     color: inherit;
 }
 
+.button_big:hover, .button_small:hover {
+    color: rgba(68,121,127,1);
+}
+
 .button_big {
     font-size: 1.5em;
     margin-bottom: 15px;
@@ -51,12 +51,13 @@
 
 .button_small {
     font-size: 1em;
-    padding: 0px 10px;
 }
 
 .active {
     background-color: rgba(41,75,78,1);
     pointer-events: none;
+    border-radius: 3px;
+    padding: 5px 7px;
 }
 
 .image {
