@@ -1,8 +1,21 @@
-import { useNavigate, NavLink } from "react-router-dom"
+import { useNavigate, NavLink, useParams, useLocation } from "react-router-dom"
 import styles from './NavBar.module.css'
+import { useEffect, useState } from "react";
 
 function NavBar() {
-  const navigate = useNavigate()    
+  const navigate = useNavigate();
+  const { category } = useParams();
+  const [lastCategory, setLastCategory] = useState();
+  const location = useLocation();
+  const isProductsPage = location.pathname.includes("products");
+
+  //Keeps track of category
+  useEffect(() => {
+    if(isProductsPage) {
+      setLastCategory(category)
+    }
+  }, [category, isProductsPage])
+
   return (
     <>
       <nav className={styles.nav}>
@@ -19,7 +32,7 @@ function NavBar() {
           Home
           </NavLink>
           <NavLink 
-          to="products" 
+          to={`products/${lastCategory || ""}`} 
           className={({isActive}) => 
           isActive ? (styles.link_active) : ""} >
           Products

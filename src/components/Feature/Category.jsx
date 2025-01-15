@@ -44,7 +44,7 @@ function Category({ categoryData }) {
                 </div>
             ))}
             { !isHomePage &&
-                <NavLink to="products" 
+                <NavLink to="products/" 
                 className={({ isActive }) => 
                     `${isActive ? styles.active : ""} 
                     ${isHomePage ? styles.button_big : styles.button_small}`
