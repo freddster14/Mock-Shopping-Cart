@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
-import  Category  from "../Feature/Category"
+import Category from "../Feature/Category"
+import Rating from "../Rating/Rating"
 import Loading from "../Route/Loading"
 import styles from "./Products.module.css"
 import { useNavigate, useParams } from "react-router-dom"
@@ -114,38 +115,6 @@ DisplayItems.propTypes = {
   setSelectedItem: PropTypes.func,
 }
 
-function Rating({ itemRate }) {
-  const {rate, count} = itemRate;
-  let starCount = Math.round(rate)
-  const decimal = Math.round((rate - Math.floor(rate)) * 10)
-  let halfStar = decimal < 8 && decimal > 2 ? true : false;
 
-  if(halfStar && starCount > rate) {
-     starCount -= 1;
-  }
-
-  function setStars(stars) {
-    const starElements = []
-    for(let i = 0; i < 5; i++) {
-      if(stars > i) {
-        starElements.push(
-          <img key={i} src="/src/assets/fullstar.png" alt="Star" className={styles.star}/>
-        )
-      } else if(halfStar) {
-        starElements.push(
-          <img key={i} src="/src/assets/halfstar.png" alt="Half Star" className={styles.star}/>
-        )
-        halfStar = false
-      } else {
-        starElements.push(
-          <img key={i} src="/src/assets/emptystar.png" alt="Empty Star" className={styles.star}/>
-        )
-      }
-    }
-    return <div className={styles.rating_container}>{starElements} ({count})</div>
-  }
-
-  return (setStars(starCount))
-}
 
 export default Products

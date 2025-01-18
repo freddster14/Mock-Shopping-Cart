@@ -68,18 +68,7 @@
     text-decoration: underline;
 }
 
-.rating_container{
-    display: flex;
-    gap: 3px;
-    font-size: 0.8em;
-    align-items: center;
-    margin: 3px 0px;
-}
 
-.star{
-    width: 18px;
-    height: 18px;
-}
 
 .price {
     margin: 0;

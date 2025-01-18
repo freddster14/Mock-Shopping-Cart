@@ -1,0 +1,32 @@
+.rating_container{
+    display: flex;
+    gap: 3px;
+    font-size: 0.8em;
+    align-items: center;
+    margin: 3px 0px;
+}
+
+.rating_container_buy {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    margin: 3px 0px;
+    gap: 3px;
+}
+.rate, .count{
+    margin: 0px;
+    margin-top: 3px;
+}
+
+.rate {
+    margin-right: 1px;
+}
+
+.count {
+    margin-left: 3px;
+}
+
+.star{
+    width: 18px;
+    height: 18px;
+}
