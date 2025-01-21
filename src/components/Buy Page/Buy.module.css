@@ -5,6 +5,7 @@
     padding: 0px 35px;
     margin: 0 auto;
     max-width: 1500px;
+    max-height: 55vh;
     margin-top: 54px;
 }
 
@@ -14,7 +15,7 @@
     justify-content: center;
     background-color: white;
     border-radius: 10px;
-    width: 100%;
+    width: 90%;
 }
 
 .image {
@@ -72,9 +73,7 @@
     padding: 7px;
 }
 
-.add_to_cart:hover {
-    background-color: rgb(12, 12, 12);
-}
+.add_to_cart:hover {background-color: rgb(12, 12, 12);}
 
 .separator {
     width: 98%;
@@ -101,9 +100,7 @@
     border-bottom: 1px solid white;
 }
 
-.info_heading h2 {
-    margin: 0;
-}
+.info_heading h2 {margin: 0;}
 
 .drop_symbol {
     font-size: 1.3em;
@@ -111,7 +108,6 @@
     width: 32px;
     text-align: center;
 }
-
 
 .drop_down_info {
     border: 1px solid white;
