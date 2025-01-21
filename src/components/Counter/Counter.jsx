@@ -18,18 +18,18 @@ function Counter({
         quantityEvent(input)
     }
     return (
-        <>
-          <button onClick={(e) => modifyQuantity(-1, e.target.nextElementSibling)}>-</button>
+        <div className={styles.container}>
+          <button className={styles.minus} onClick={(e) => modifyQuantity(-1, e.target.nextElementSibling)}>−</button>
           <input 
-          className={styles.label} 
+          className={styles.input} 
           value={quantity}
           onChange={(e) => quantityEvent(e.target)}
           placeholder={quantity} 
           min="0" 
           max="99" 
           type="text" />
-          <button onClick={(e) => modifyQuantity(1, e.target.previousElementSibling)}>+</button>
-        </> 
+          <button className={styles.plus} onClick={(e) => modifyQuantity(1, e.target.previousElementSibling)}>+</button>
+        </div> 
     )
 }
 

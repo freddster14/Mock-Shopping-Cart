@@ -73,11 +73,11 @@ function FeatureContent ({
         </header>
       }
       <section>
-        <h2>Jump into a Category</h2>
+        <h1>Jump into a Category</h1>
           {children}
       </section>
       <section>          
-        <h2>Hottest Items</h2>
+        <h1>Hottest Items</h1>
         {!subItems ? <Loading styleName={styles.sub_items_load}/>
         : <div className={styles.sub_items}>
             {subItems.map((item => (
@@ -86,7 +86,7 @@ function FeatureContent ({
                     <img src={item.image} alt={item.title} />
                   </div>
                   <div className={styles.sub_item_info}>
-                    <h3>{item.title}</h3>
+                    <h2>{item.title}</h2>
                     <p>${item.price}</p>
                   </div>
                 </div>
