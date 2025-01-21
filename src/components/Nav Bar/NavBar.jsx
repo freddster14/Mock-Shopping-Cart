@@ -19,30 +19,32 @@ function NavBar() {
   return (
     <>
       <nav className={styles.nav}>
-        <h1
-        onClick={() => navigate('/')} 
-        className={styles.title}>
-        Title
-        </h1>
-        <div className={styles.link_container}>
-          <NavLink 
-          to="/"
-          className={({isActive}) =>
-          isActive ? styles.link_active : ""}>
-          Home
-          </NavLink>
-          <NavLink 
-          to={`products/${lastCategory || ""}`} 
-          className={({isActive}) => 
-          isActive ? (styles.link_active) : ""} >
-          Products
-          </NavLink>
-          <NavLink 
-          to="cart"  
-          className={({isActive}) =>
-          isActive ? styles.link_active : ""}>
-          Cart
-          </NavLink>
+        <div className={styles.nav_items}>
+          <h1
+          onClick={() => navigate('/')}
+          className={styles.title}>
+          Title
+          </h1>
+          <div className={styles.link_container}>
+            <NavLink
+            to="/"
+            className={({isActive}) =>
+            isActive ? styles.link_active : ""}>
+            Home
+            </NavLink>
+            <NavLink
+            to={`products/${lastCategory || ""}`}
+            className={({isActive}) =>
+            isActive ? (styles.link_active) : ""} >
+            Products
+            </NavLink>
+            <NavLink
+            to="cart"
+            className={({isActive}) =>
+            isActive ? styles.link_active : ""}>
+            Cart
+            </NavLink>
+          </div>
         </div>
       </nav>
     </>

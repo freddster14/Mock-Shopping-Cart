@@ -97,19 +97,16 @@ function DropDownInfo({ css, title, info, link  }) {
     setIsActive((prev) => !prev)   
   }
   return (
-    <div className={`${css} ${styles.product_info}`}>
+    <div className={`${css} ${styles.drop_down_container}`}>
       <div 
-        className={styles.info_heading}
+        className={styles.drop_down_heading}
         onClick={dropDown}
       >
-      <h2>{title}</h2>
-      <p className={styles.drop_symbol}>{isActive ? "⯅"  : "▼"}</p>
+        <h2>{title}</h2>
+        <p className={styles.drop_symbol}>{isActive ? "⯅"  : "▼"}</p>
       </div>
         {isActive && 
-        <div className={styles.drop_down_content}>
-          <p className={styles.description}>{info}.</p>
-          {link && <a>See details</a>}
-        </div>
+          <p className={styles.drop_down_info}>{info}. {link && <a>See details</a>}</p>
         }
     </div>
   )

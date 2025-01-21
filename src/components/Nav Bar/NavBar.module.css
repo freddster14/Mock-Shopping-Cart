@@ -12,16 +12,22 @@
     background: linear-gradient(90deg, rgba(27,29,26,1) 2%, rgba(41,75,78,1) 65%, rgba(68,121,127,1) 100%);
 }
 
+.nav_items{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
 .title {
     font-size: 48px;
 }
 
 .link_container {
-    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
     gap: 15px;
 }
 
