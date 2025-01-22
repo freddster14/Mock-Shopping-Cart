@@ -19,6 +19,11 @@
     max-height: 55vh;
 }
 
+.header_loading {
+    width: 100%;
+    aspect-ratio: 2/1;
+}
+
 .image_container {
     border-right: 7px solid rgba(41,75,78,1);
     display: flex;
@@ -85,7 +90,7 @@
 
 .sub_items_load{
     width: 100%;
-    height: 48vh;
+    height: 700px;
 }
 
 .sub_item{
@@ -96,7 +101,7 @@
     display: flex;
     text-align: center;
     overflow: hidden;
-    border: rgb(255, 255, 255) solid 2px;
+    border: rgb(255, 255, 255) solid 1px;
     border-radius: 10px;
     cursor: pointer;
 }

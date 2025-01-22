@@ -59,7 +59,7 @@ function FeatureContent ({
   }
   return (
     <div className={styles.feature_container}>
-      {!heroItem ? <Loading styleName={styles.header}/> 
+      {!heroItem ? <Loading styleName={styles.header_loading}/> 
       : <header  onClick={() => eventFunction(heroItem)} className={styles.header}>
             <div className={styles.image_container}>
               <img className={styles.hero_image} src={heroItem.image} alt={heroItem.title} />

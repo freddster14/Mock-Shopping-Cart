@@ -25,10 +25,7 @@ a {
   color: #E8EBF3;
   text-decoration: inherit;
 }
-a:hover {
-  color: rgb(27, 29, 26);
-  text-decoration: underline;
-}
+a:hover {text-decoration: underline;}
 
 body {
   margin: 0 auto;
@@ -44,9 +41,8 @@ h1 {
   cursor: pointer;
 }
 
-
 #loading {
-  border-radius: 20px;
+  border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.144);
   margin: 15px auto auto auto;
   animation: loading 0.7s alternate infinite;
