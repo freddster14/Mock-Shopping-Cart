@@ -1,5 +1,6 @@
 import Loading from "../Route/Loading"
 import  Category  from "./Category"
+import Rating from "../Rating/Rating"
 import { useLocalStorage } from "../../LocalStorage"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
@@ -57,27 +58,25 @@ function FeatureContent ({
     navigate('/buy')
   }
   return (
-    <>
+    <div className={styles.feature_container}>
       {!heroItem ? <Loading styleName={styles.header}/> 
-      : <header className={styles.header}>
-          <div className={styles.hero_item} onClick={() => eventFunction(heroItem)}>
+      : <header  onClick={() => eventFunction(heroItem)} className={styles.header}>
             <div className={styles.image_container}>
-              <img src={heroItem.image} alt={heroItem.title} />
+              <img className={styles.hero_image} src={heroItem.image} alt={heroItem.title} />
             </div>
             <div className={styles.hero_item_info}>
               <h2 className={styles.hero_item_title}>Latest Drop</h2>
               <h3>{heroItem.title}</h3>
               <p>${heroItem.price}</p>
             </div>
-          </div>
         </header>
       }
       <section>
-        <h1>Jump into a Category</h1>
+        <h1 className={styles.titles}>Jump into a Category</h1>
           {children}
       </section>
       <section>          
-        <h1>Hottest Items</h1>
+        <h1 className={styles.titles}>Hottest Items</h1>
         {!subItems ? <Loading styleName={styles.sub_items_load}/>
         : <div className={styles.sub_items}>
             {subItems.map((item => (
@@ -87,6 +86,7 @@ function FeatureContent ({
                   </div>
                   <div className={styles.sub_item_info}>
                     <h2>{item.title}</h2>
+                    <Rating itemRate={item.rating} />
                     <p>${item.price}</p>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ function FeatureContent ({
           </div>
         }
       </section>
-    </>
+    </div>
   )
 }
 

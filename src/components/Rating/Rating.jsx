@@ -4,7 +4,8 @@ import styles from "./Rating.module.css"
 export default function Rating({ itemRate }) {
     const {rate, count} = itemRate;
     const location = useLocation();
-    const isBuyPage = location.pathname === "/buy"
+    const isBuyPage = location.pathname === "/buy";
+    const isHomePage = location.pathname === "/"
     let starCount = Math.round(rate)
     const decimal = Math.round((rate - Math.floor(rate)) * 10)
     let halfStar = decimal < 8 && decimal > 2 ? true : false;
@@ -31,11 +32,15 @@ export default function Rating({ itemRate }) {
           )
         }
       }
+
       if(isBuyPage) {
         return <div className={styles.rating_container_buy}>
             <p className={styles.rate}>{rate}</p> {starElements} 
             <p className={styles.count}>{count} ratings</p>
           </div>
+      } else if(isHomePage) {
+        return <div className={styles.rating_container_home}>{starElements} ({count})</div>
+
       } else {
         return <div className={styles.rating_container}>{starElements} ({count})</div>
       }
