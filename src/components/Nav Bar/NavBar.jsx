@@ -2,20 +2,19 @@ import { useNavigate, NavLink, useParams, useLocation } from "react-router-dom"
 import styles from './NavBar.module.css'
 import { useEffect, useState } from "react";
 
-function NavBar() {
+function NavBar({ cartLength }) {
   const navigate = useNavigate();
   const { category } = useParams();
   const [lastCategory, setLastCategory] = useState();
   const location = useLocation();
   const isProductsPage = location.pathname.includes("products");
-
   //Keeps track of category
   useEffect(() => {
     if(isProductsPage) {
       setLastCategory(category)
     }
-  }, [category, isProductsPage])
 
+  }, [category, isProductsPage])
   return (
     <>
       <nav className={styles.nav}>
@@ -40,9 +39,10 @@ function NavBar() {
             </NavLink>
             <NavLink
             to="cart"
+            id={styles.cart_icon}
             className={({isActive}) =>
             isActive ? styles.link_active : ""}>
-            Cart
+            🛒<span className={styles.cart_quantity}>{cartLength}</span>
             </NavLink>
           </div>
         </div>
