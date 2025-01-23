@@ -1,8 +1,8 @@
 import PropTypes from "prop-types"
 import styles from './Buy.module.css'
 import Rating from "../Rating/Rating"
+import BuyModal from "./BuyModal"
 import { useState } from "react"
-import { NavLink } from "react-router-dom"
 import Counter from "../Counter/Counter"
 import { updateCart } from "../Cart/CartLogic"
 
@@ -19,45 +19,15 @@ function Buy({
     setUserAddToCart(true)
   }
 
-  const handleCloseModal = () => {
-    setUserAddToCart(false);
-  }
-
-  function removeItem(id) {
-    const newArray = cart.filter(item => item.id !== id )
-    setCart(newArray)
-    handleCloseModal()
-  }
-
-  function returnItemQuantity() {
-    const index = cart.findIndex(obj => obj.id === item.id);
-    return cart[index].value
-  }
-
   return (
     <>
       {userAddToCart &&
-        <div className={styles.cart_modal}>
-          <div className={styles.heading}>
-            <h1><span>✅</span>Added to cart</h1>
-            <button 
-            className={styles.close_modal} 
-            onClick={handleCloseModal}>×</button>
-          </div>
-          <div className={styles.item_container_modal}>
-            <div className={styles.img_container_modal}>
-              <img src={item.image} alt={item.title}/>
-            </div>
-            <div className={styles.modal_info}>
-            <p className={styles}>{item.title}</p>
-            <p>${item.price}</p>
-            </div>
-            <p>Quantity {returnItemQuantity()}</p>
-          </div>
-          <p>Shipping <span>Free</span></p>
-          <NavLink to="/cart">See in cart</NavLink>
-          <button onClick={() => removeItem(item.id)}>Remove item</button>
-        </div> 
+        <BuyModal 
+          item={item} 
+          setUserAddToCart={setUserAddToCart} 
+          cart={cart} 
+          setCart={setCart}
+        />
       }
       <div className={styles.buy_container}>
         <div className={styles.img_div}>
@@ -85,25 +55,21 @@ function Buy({
           <div className={styles.separator}></div>
           <div className={styles.info_container}>
             <DropDownInfo
-            css={styles.details}
             title="Details"
             info={item.description}
             link={false}
             />
             <DropDownInfo
-            css={styles.shipping}
             title="Shipping"
             info="Free standard shipping on orders over $35. On most stores"
             link={true}
             />
             <DropDownInfo
-            css={styles.return}
             title="Returns"
             info="Free return within 28 days of delivery. Unless advised"
             link={true}
             />
             <DropDownInfo
-            css={styles.warranty}
             title="Warranty"
             info="30 day repairs or replacements + shipping insurance"
             link={true}
@@ -111,8 +77,7 @@ function Buy({
           </div>
         </div> 
       </div>
-    </>
-    
+    </> 
   )
 }
 
@@ -140,13 +105,13 @@ Buy.propTypes = {
 }
 
 
-function DropDownInfo({ css, title, info, link  }) {
+function DropDownInfo({ title, info, link  }) {
   const [isActive, setIsActive] = useState(false);
   const dropDown = () => {
     setIsActive((prev) => !prev)   
   }
   return (
-    <div className={`${css} ${styles.drop_down_container}`}>
+    <div className={styles.drop_down_container}>
       <div 
         className={styles.drop_down_heading}
         onClick={dropDown}
@@ -154,11 +119,17 @@ function DropDownInfo({ css, title, info, link  }) {
         <h2>{title}</h2>
         <p className={styles.drop_symbol}>{isActive ? "⯅"  : "▼"}</p>
       </div>
-        {isActive && 
-          <p className={styles.drop_down_info}>{info}. {link && <a>See details</a>}</p>
-        }
+      {isActive && 
+        <p className={styles.drop_down_info}>{info}. {link && <a>See details</a>}</p>
+      }
     </div>
   )
+}
+
+DropDownInfo.propTypes = {
+  title: PropTypes.string,
+  info: PropTypes.string,
+  link: PropTypes.bool,
 }
 
 
