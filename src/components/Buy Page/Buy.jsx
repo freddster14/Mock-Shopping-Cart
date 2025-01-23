@@ -7,9 +7,9 @@ import Counter from "../Counter/Counter"
 import { updateCart } from "../Cart/CartLogic"
 
 function Buy({
-    item,
-    cart,
-    setCart,
+  item,
+  cart,
+  setCart,
 }) {
   const [quantity, setQuantity] = useState({value: 1})
   const [userAddToCart, setUserAddToCart] = useState(false)
