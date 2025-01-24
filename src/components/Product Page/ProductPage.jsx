@@ -106,7 +106,7 @@ ProductPage.propTypes = {
 
 
 function DropDownInfo({ title, info, link  }) {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(() => title === "Details" ? true : false);
   const dropDown = () => {
     setIsActive((prev) => !prev)   
   }
