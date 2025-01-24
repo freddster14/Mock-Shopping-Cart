@@ -14,6 +14,7 @@ function BuyModal({
   }
 
   const handleCloseModal = () => {setUserAddToCart(false)}
+
   function returnItemQuantity() {
     const index = cart.findIndex(obj => obj.id === item.id);
     return cart[index].value
@@ -35,9 +36,8 @@ function BuyModal({
           <p>{item.title}</p>
         </div>
         <div className={styles.item_info}>
-          <p>Item <span>${item.price}</span></p>
-          <p>Quantity <span>{returnItemQuantity()}</span></p>
-          <p>Shipping <span>Free</span></p>
+          <p>Price <span>${item.price}</span></p>
+          <p>In Cart <span>{returnItemQuantity()}</span></p>
         </div>
         <NavLink to="/cart" className={styles.open_cart}>See in cart</NavLink>
         <button  className={styles.remove} onClick={() => removeItem(item.id)}>Remove item</button>
