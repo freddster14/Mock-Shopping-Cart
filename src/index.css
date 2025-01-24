@@ -1,11 +1,11 @@
 @font-face {
   font-family:  'amazon-ember-regular';
-  src: url(./assets/Ember/AmazonEmber_Rg.ttf);
+  src: url(/public/Ember/AmazonEmber_Rg.ttf);
 }
 
 @font-face {
   font-family: 'amazon-ember-bold';
-  src: url(./assets/Ember/AmazonEmber_Bd.ttf);
+  src: url(/public/Ember/AmazonEmber_Bd.ttf);
 }
 
 :root {
@@ -13,7 +13,7 @@
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
-  background-color: rgb(27, 29, 26);
+  background-color: #1b1d1a;
   color: #e8ebf3;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

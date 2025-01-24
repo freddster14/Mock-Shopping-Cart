@@ -13,7 +13,6 @@ function NavBar({ cartLength }) {
     if(isProductsPage) {
       setLastCategory(category)
     }
-
   }, [category, isProductsPage])
   return (
     <>
@@ -22,7 +21,7 @@ function NavBar({ cartLength }) {
           <h1
           onClick={() => navigate('/')}
           className={styles.title}>
-          Title
+          MockBox
           </h1>
           <div className={styles.link_container}>
             <NavLink
