@@ -2,7 +2,7 @@ import NavBar from "../Nav Bar/NavBar";
 import Feature from "../Feature/Feature";
 import { useState, useEffect } from "react";
 import Products from '../Products/Products'
-import Buy from "../Buy Page/Buy"
+import ProductPage from "../Product Page/ProductPage"
 import { useParams } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useLocalStorage } from "../../LocalStorage";
@@ -44,8 +44,8 @@ function Home() {
   return (
     <>
       <NavBar cartLength={cart.length}/>
-      {  name === "buy" ?
-        <Buy 
+      {  name === "product-page" ?
+        <ProductPage
         item={selectedItem}
         cart={cart}
         setCart={setCart}

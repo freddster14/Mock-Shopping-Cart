@@ -19,7 +19,6 @@ function Products({
     if (category && items) {
       const selectedCategoryItems = categoryData[category];
       if(!sortValue) return setDisplayItems(selectedCategoryItems);
-      console.log("ran")
       sortItems(sortValue, selectedCategoryItems)
     } else {
       if(!sortValue) return  setDisplayItems(items);
@@ -90,7 +89,7 @@ function DisplayItems({ displayItems, setSelectedItem }) {
 
   function eventFunction(item) {
     setSelectedItem(item);
-    navigate("/buy")
+    navigate("/product-page")
   }
   return (
   <section>

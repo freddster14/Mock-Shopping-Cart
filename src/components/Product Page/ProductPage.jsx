@@ -1,12 +1,12 @@
 import PropTypes from "prop-types"
-import styles from './Buy.module.css'
+import styles from './ProductPage.module.css'
 import Rating from "../Rating/Rating"
 import BuyModal from "./BuyModal"
 import { useState } from "react"
 import Counter from "../Counter/Counter"
 import { updateCart } from "../Cart/CartLogic"
 
-function Buy({
+function ProductPage({
   item,
   cart,
   setCart,
@@ -81,7 +81,7 @@ function Buy({
   )
 }
 
-Buy.propTypes = {
+ProductPage.propTypes = {
     item: PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string,
@@ -133,4 +133,4 @@ DropDownInfo.propTypes = {
 }
 
 
-export default Buy
+export default ProductPage

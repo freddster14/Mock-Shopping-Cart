@@ -55,7 +55,7 @@ function FeatureContent ({
   const navigate = useNavigate();
   function eventFunction(item) {
     setSelectedItem(item)
-    navigate('/buy')
+    navigate('/product-page')
   }
   return (
     <div className={styles.feature_container}>

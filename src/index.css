@@ -21,7 +21,6 @@
 }
 
 a {
-  font-weight: 500;
   color: #E8EBF3;
   text-decoration: inherit;
 }
@@ -38,7 +37,6 @@ h1 {
   font-size: 3.2em;
   font-family: 'amazon-ember-bold';
   line-height: 1.1;
-  cursor: pointer;
 }
 
 #loading {
