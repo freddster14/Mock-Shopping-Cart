@@ -1,6 +1,6 @@
 .container {
     border: 1px rgb(232, 235, 243) solid;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 3px 10px;
     display: flex;
     align-items: center;
@@ -8,9 +8,10 @@
 .minus, .plus {
     background-color: inherit;
     color: inherit;
-    font-size: 1em;
+    font-size: 1.1em;
     border: none;
     cursor: pointer;
+    font-family: inherit;
 }
 
 .minus:hover {
@@ -25,11 +26,12 @@
     background-color: rgb(27, 27, 27);
     color: inherit;
     text-align: center;
-    font-size: 0.8em;
+    font-family: inherit;
+    font-size: 0.9em;
     max-width: 40px;
     border: none;
 }
 
 .input:hover {
-  outline: auto;
+  
 }

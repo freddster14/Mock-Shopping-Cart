@@ -1,11 +1,13 @@
 import PropTypes from "prop-types"
 import styles from "./Counter.module.css"
+import { useLocation } from "react-router-dom";
 
 function Counter({ 
     quantity,
     setQuantity,
  }) {
-
+  const location = useLocation();
+  const isCartPage = location.pathname === "/cart";
   function quantityEvent(target) {
       let { value, min, max } = target;
       value = Math.max(Number(min), Math.min(Number(max), Number(value)));
@@ -25,18 +27,20 @@ function Counter({
         −
       </button>
       <input 
-        className={styles.input} 
-        value={quantity}
-        onChange={(e) => quantityEvent(e.target)}
-        placeholder={quantity} 
-        min="0" 
-        max="99" 
-        type="text" />
+      disabled={isCartPage}
+      className={styles.input} 
+      value={quantity}
+      onChange={(e) => quantityEvent(e.target)}
+      placeholder={quantity} 
+      min={isCartPage ? "1" : "0"} 
+      max="99" 
+      type="text" />
       <button 
-        className={styles.plus} 
-        onClick={(e) => modifyQuantity(1, e.target.previousElementSibling)}>
-        +
+      className={styles.plus} 
+      onClick={(e) => modifyQuantity(1, e.target.previousElementSibling)}>
+      +
       </button>
+     
     </div> 
   )
 }
