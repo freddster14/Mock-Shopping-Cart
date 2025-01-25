@@ -1,11 +1,11 @@
 @font-face {
   font-family:  'amazon-ember-regular';
-  src: url(/public/Ember/AmazonEmber_Rg.ttf);
+  src: url(/Ember/AmazonEmber_Rg.ttf);
 }
 
 @font-face {
   font-family: 'amazon-ember-bold';
-  src: url(/public/Ember/AmazonEmber_Bd.ttf);
+  src: url(/Ember/AmazonEmber_Bd.ttf);
 }
 
 :root {
