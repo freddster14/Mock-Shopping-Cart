@@ -67,7 +67,7 @@ function FeatureContent ({
             <div className={styles.hero_item_info}>
               <h2 className={styles.hero_item_title}>Latest Drop</h2>
               <h3>{heroItem.title}</h3>
-              <p>${heroItem.price}</p>
+              <p>${parseFloat(heroItem.price).toFixed(0)}</p>
             </div>
         </header>
       }
@@ -87,7 +87,7 @@ function FeatureContent ({
                   <div className={styles.sub_item_info}>
                     <h2>{item.title}</h2>
                     <Rating itemRate={item.rating} />
-                    <p>${item.price}</p>
+                    <p>${parseFloat(item.price).toFixed(2)}</p>
                   </div>
                 </div>
             )))}

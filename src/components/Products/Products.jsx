@@ -101,7 +101,7 @@ function DisplayItems({ displayItems, setSelectedItem }) {
           </div>
           <h2 className={styles.title}>{item.title}</h2>
           <Rating itemRate={item.rating}/>
-          <p className={styles.price}>${item.price}</p>
+          <p className={styles.price}>${parseFloat(item.price).toFixed(2)}</p>
         </li>
       ))}
     </ul>

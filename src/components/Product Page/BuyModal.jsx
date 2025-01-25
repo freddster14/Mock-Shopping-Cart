@@ -36,7 +36,7 @@ function BuyModal({
           <p>{item.title}</p>
         </div>
         <div className={styles.item_info}>
-          <p>Price <span>${item.price}</span></p>
+          <p>Price <span>${parseFloat(item.price).toFixed(2)}</span></p>
           <p>In Cart <span>{returnItemQuantity()}</span></p>
         </div>
         <NavLink to="/cart" className={styles.open_cart}>See in cart</NavLink>

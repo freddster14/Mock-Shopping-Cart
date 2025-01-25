@@ -36,7 +36,7 @@ function ProductPage({
         <div className={styles.info}>
           <h1 className={styles.title}>{item.title}</h1>
           <Rating itemRate={item.rating}/>
-          <h2 className={styles.price}>${item.price}</h2>
+          <h2 className={styles.price}>${parseFloat(item.price).toFixed(2)}</h2>
           <div className={styles.quantity_buy}>
             <div className={styles.quantity}>
               <label className={styles.label} htmlFor="quantity">Quantity:</label>
