@@ -11,7 +11,7 @@ function ProductPage({
   cart,
   setCart,
 }) {
-  const [quantity, setQuantity] = useState({value: 1})
+  const [quantity, setQuantity] = useState({value: 0})
   const [userAddToCart, setUserAddToCart] = useState(false)
 
   const handleAddToCart = () => {

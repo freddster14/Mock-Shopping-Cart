@@ -71,6 +71,7 @@
     border-radius: 50px;
     border: 1px solid rgba(68,121,127,1);
     padding: 7px;
+    font-family: inherit;
 }
 
 .add_to_cart:hover {background-color: rgb(12, 12, 12);}
