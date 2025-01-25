@@ -1,21 +1,35 @@
 .container {
+    border: 1px rgb(232, 235, 243) solid;
+    border-radius: 15px;
+    padding: 3px 10px;
     display: flex;
-    gap: 5px;
+    align-items: center;
 }
 .minus, .plus {
     background-color: inherit;
     color: inherit;
     font-size: 1em;
     border: none;
+    cursor: pointer;
+}
+
+.minus:hover {
+  color: #ff3f1a;
+}
+
+.plus:hover {
+  color: #44797f;
 }
 
 .input {
     background-color: rgb(27, 27, 27);
     color: inherit;
-    padding: 10px 10px;
     text-align: center;
     font-size: 0.8em;
-    max-width: 50px;
-    border: 1px rgb(232, 235, 243) solid;
-    border-radius: 15px;
+    max-width: 40px;
+    border: none;
+}
+
+.input:hover {
+  outline: auto;
 }
