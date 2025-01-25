@@ -78,7 +78,7 @@
 
 .separator {
     width: 98%;
-    border: 1px solid #E8EBF3;
+    border: 1px solid rgb(100, 100, 100);
     margin: 20px auto;
 }
 
@@ -98,7 +98,7 @@
     justify-content: space-between;
     align-items: center;
     height: 42px;
-    border-bottom: 1px solid #E8EBF3;
+    border-bottom: 1px solid rgb(100, 100, 100);
 }
 
 .info_heading h2 {margin: 0;}
@@ -111,7 +111,7 @@
 }
 
 .drop_down_info {
-    border: 1px solid white;
+    border: 1px solid rgb(100, 100, 100);
     border-top: none;
     margin: 0;
     font-size: 14px;

@@ -45,7 +45,6 @@ function Cart({
                 cartInfo={cartInfo}
               />
               </li>
-
             </Fragment>
           )))
           : <h1>Cart is empty add items</h1>
@@ -84,7 +83,7 @@ function CartItems({
           <p>{item.title}</p>
           <p className={styles.price}>${parseFloat(item.price).toFixed(2)}</p>
         </div>
-        {isShippingFree && <p>Free Shipping</p>}
+        <p>{isShippingFree ? "Free shipping" : "Free shipping over $30"}</p>
         <p>Free returns</p>
         <div className={styles.item_settings}>
           <Counter 

@@ -8,19 +8,23 @@
 }
 
 .cart_container {
-  width: 70%;
+  width: 75%;
 }
 
 .heading {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  border-bottom: 1px solid white;
-  padding-bottom: 10px;
+  border-bottom: 2px solid rgb(53, 53, 53);
+  font-size: .7em;
 }
 
-.heading h2, .heading h1 {
-  margin: 0;
+.heading h1 {
+  margin: 10px 0;
+}
+
+.heading h2 {
+  margin: 0px;
 }
 
 .list_items {
@@ -36,6 +40,8 @@
   list-style: none;
   gap: 25px;
   display: flex;
+  border-bottom: 2px solid rgb(53, 53, 53);
+  padding-bottom: 20px;
 }
 
 .img_container {
@@ -103,7 +109,8 @@
 
 
 .total_container {
-  width: 30%;
+  margin-top: 60px;
+  width: 25%;
   display: flex;
   align-items: center;
   padding: 7px 4;
