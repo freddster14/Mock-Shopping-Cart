@@ -1,13 +1,26 @@
 import PropTypes from "prop-types"
 import Counter from "../Counter/Counter"
 import { updateCart } from "./CartLogic"
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import styles from "./Cart.module.css"
 
 function Cart({ 
   cart,
   setCart,
 }) {
+  const cartInfo = getCartInfo()
+
+  function getCartInfo() {
+    let quantity = 0;
+    let subTotal = 0;
+    for(let item of cart) {
+      subTotal += (item.price * item.value);
+      quantity += item.value
+    }
+    subTotal = parseFloat(subTotal).toFixed(2);
+    return {total: subTotal, quantity: quantity}
+  }
+  
   function removeItem(id) {
     const newArray = cart.filter(item => item.id !== id )
     setCart(newArray)
@@ -22,22 +35,26 @@ function Cart({
         <ul className={styles.list_items}>
         {cart.length > 0
           ? (cart.map((item) => (
-            <li key={item.id} className={styles.item}>
+            <Fragment key={item.id}>
+              <li  className={styles.item_card}>
               <CartItems
                 cart={cart}
                 item={item}
                 setCart={setCart}
                 removeItem={removeItem}
+                cartInfo={cartInfo}
               />
-            </li>
+              </li>
+
+            </Fragment>
           )))
           : <h1>Cart is empty add items</h1>
           }
         </ul>
       </div>
-      
       <div className={styles.total_container}>
-        <p>Item{cart.length > 1 ? `s (${cart.length})` : `(${cart.length})`}</p>
+        <p>Item{cartInfo.quantity > 1 ? `s (${cartInfo.quantity})` : `(${cartInfo.quantity})`}</p>
+        <p>Subtotal <span>{cartInfo.total}</span></p>
       </div>
     </div> 
   )
@@ -48,9 +65,10 @@ function CartItems({
   item,
   setCart,
   removeItem,
+  cartInfo,
  }) {
   const [quantity, setQuantity] = useState({value: item.value})
-  const isShippingFree = console.log(cart)
+  const isShippingFree = cartInfo.total > 35;
   function updateQuantity(quantity) {
     const updatedCart = updateCart(cart, item, quantity.value - item.value);
     setQuantity(quantity)
@@ -61,19 +79,21 @@ function CartItems({
       <div className={styles.img_container}>
         <img src={item.image} alt={item.title} />
       </div>
-      <div>
-        <p>{item.title}</p>
-        <p>{isShippingFree ? "Free Shipping" : "Shipping $7.99"}</p>
+      <div className={styles.item_info}>
+        <div className={styles.item_heading}>
+          <p>{item.title}</p>
+          <p className={styles.price}>${parseFloat(item.price).toFixed(2)}</p>
+        </div>
+        {isShippingFree && <p>Free Shipping</p>}
         <p>Free returns</p>
         <div className={styles.item_settings}>
           <Counter 
           quantity={quantity.value}
           setQuantity={updateQuantity}
           />
-          <button onClick={() => removeItem(item.id) }>Delete</button>
+          <button className={styles.delete} onClick={() => removeItem(item.id) }>Delete</button>
         </div>
       </div>
-      <p>${item.price}</p>
     </>
   )
 }
