@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import Counter from "../Counter/Counter"
 import { updateCart } from "./CartLogic"
 import { Fragment, useState } from "react"
+import { NavLink } from "react-router-dom"
 import styles from "./Cart.module.css"
 
 function Cart({ 
@@ -13,12 +14,31 @@ function Cart({
   function getCartInfo() {
     let quantity = 0;
     let subTotal = 0;
+    let total = 0;
+    let shipping = 0;
+    let tax = 0.0712;
     for(let item of cart) {
       subTotal += (item.price * item.value);
       quantity += item.value
     }
-    subTotal = parseFloat(subTotal).toFixed(2);
-    return {total: subTotal, quantity: quantity}
+    subTotal = parseFloat(subTotal);
+    shipping += ((subTotal > 30) ?  0 : 5.99);
+    tax = (subTotal * tax);
+
+    subTotal = subTotal + shipping;
+
+    subTotal = subTotal.toFixed(2);
+    tax = tax.toFixed(2);
+
+    total =  parseFloat(subTotal) + parseFloat(tax);
+    total = total.toFixed(2);
+    return {
+      quantity: quantity,
+      subTotal: subTotal,
+      shipping: shipping,
+      taxTotal: tax,
+      total: total
+    } 
   }
   
   function removeItem(id) {
@@ -27,36 +47,63 @@ function Cart({
   }
   return (
     <div className={styles.body}>
-      <div className={styles.cart_container}>
-        <div className={styles.heading}>
+      <div className={styles.heading}>
           <h1>Shopping Cart</h1>
           <h2>Price</h2>
-        </div>
-        <ul className={styles.list_items}>
-        {cart.length > 0
-          ? (cart.map((item) => (
-            <Fragment key={item.id}>
-              <li  className={styles.item_card}>
-              <CartItems
-                cart={cart}
-                item={item}
-                setCart={setCart}
-                removeItem={removeItem}
-                cartInfo={cartInfo}
-              />
-              </li>
-            </Fragment>
-          )))
-          : <h1>Cart is empty add items</h1>
-          }
-        </ul>
       </div>
-      <div className={styles.total_container}>
-        <p>Item{cartInfo.quantity > 1 ? `s (${cartInfo.quantity})` : `(${cartInfo.quantity})`}</p>
-        <p>Subtotal <span>{cartInfo.total}</span></p>
+      <div className={styles.data_container}>
+        <div className={styles.cart_container}>
+          <ul className={styles.list_items}>
+            {cart.map((item) => (
+              <Fragment key={item.id}>
+                <li  className={styles.item_card}>
+                <CartItems
+                  cart={cart}
+                  item={item}
+                  setCart={setCart}
+                  removeItem={removeItem}
+                  cartInfo={cartInfo}
+                />
+                </li>
+              </Fragment>
+            ))}
+            <p className={styles.sub_total}>Subtotal ({cartInfo.quantity}) <span>${cartInfo.subTotal - cartInfo.shipping}</span></p>      
+          </ul>
+        </div>
+        <div className={styles.total_container}>
+          <p>
+            Item 
+            {cartInfo.quantity > 1 
+              ? `s (${cartInfo.quantity})` 
+              : ` (${cartInfo.quantity})`
+            }
+            <span>
+            ${cartInfo.subTotal}
+            </span>
+          </p>
+          <p>Shipping <span>{cartInfo.total > 35 ? "Free" : "$5.99"}</span></p>
+          <div className={styles.line}></div>
+          <p className={styles.sub_total}>Subtotal <span>${cartInfo.subTotal}</span></p>
+          <NavLink className={styles.checkout} to="#">Go to checkout</NavLink>
+        </div>
       </div>
     </div> 
   )
+}
+
+
+Cart.propTypes = {
+  cart: PropTypes.arrayOf(
+      PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          title: PropTypes.string,
+          price: PropTypes.number,
+          description: PropTypes.string,
+          image: PropTypes.string,
+          value: PropTypes.number.isRequired,  
+      })
+  ),
+  setCart: PropTypes.func
 }
 
 function CartItems({ 
@@ -97,19 +144,6 @@ function CartItems({
   )
 }
 
-Cart.propTypes = {
-    cart: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            title: PropTypes.string,
-            price: PropTypes.number,
-            description: PropTypes.string,
-            image: PropTypes.string,
-            value: PropTypes.number.isRequired,  
-        })
-    ),
-    setCart: PropTypes.func
-}
 
 CartItems.propTypes = {
     item: PropTypes.shape({
@@ -132,6 +166,7 @@ CartItems.propTypes = {
         })
     ),
     setCart: PropTypes.func,
+    cartInfo: PropTypes.object,
 }
 
 export default Cart
