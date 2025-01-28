@@ -1,14 +1,18 @@
 .body {
-  display: flex;
   gap: 20px;
-  padding: 0 25px;
+  padding: 0 25px 75px 25px;
   max-width: 1500px;
   margin: 0 auto;
   margin-top: 25px;
 }
 
+.data_container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .cart_container {
-  width: 75%;
+  width: 70%;
 }
 
 .heading {
@@ -17,6 +21,7 @@
   justify-content: space-between;
   border-bottom: 2px solid rgb(53, 53, 53);
   font-size: .7em;
+  width: 70%;
 }
 
 .heading h1 {
@@ -27,9 +32,12 @@
   margin: 0px;
 }
 
+
+
 .list_items {
   margin: 0;
   padding: 0;
+  font-size: 1.1em;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -38,7 +46,7 @@
 
 .item_card {
   list-style: none;
-  gap: 25px;
+  gap: 15px;
   display: flex;
   border-bottom: 2px solid rgb(53, 53, 53);
   padding-bottom: 20px;
@@ -69,6 +77,7 @@
 
 .item_info p {
   margin: 0;
+  font-size: 0.9em;
 }
 
 .item_heading {
@@ -97,7 +106,7 @@
   border: 1px solid #ff3f1a;
   border-radius: 9px;
   color: inherit;
-  font-family: inherit;
+  font-family: 'amazon-ember-bold';
   font-size: 0.9em;
   padding: 0px 10px;
 }
@@ -107,12 +116,57 @@
 
 }
 
-
 .total_container {
-  margin-top: 60px;
-  width: 25%;
+  font-size: 1.1em;
+  padding: 15px 0px;
+  width: 28%;
+  height: 100%;
+  border-radius: 15px;
   display: flex;
   align-items: center;
-  padding: 7px 4;
   flex-direction: column;
+  background-color: rgba(54, 54, 54, 0.425);
+  gap: 15px;
 }
+
+.total_container p {
+  width: 90%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.total_container span {
+  font-family: 'amazon-ember-bold';
+}
+
+.line {
+  border: 1px solid rgb(53, 53, 53);
+  width: 91%;
+}
+
+.checkout {
+  background-color: #44797f;
+  border-radius: 25px;
+  width: 91%;
+  padding: 7px 0;
+  font-size: 1.1em;
+  text-align: center;
+  font-family: 'amazon-ember-bold';
+}
+
+.checkout:hover {
+  text-decoration: none;
+  background-color: #294b4e;
+}
+
+.sub_total {
+  font-size: 1.1em;
+  margin: 0;
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  font-family: "amazon-ember-bold";
+}
+
+/** Max width 800 - 1000 for responsive web **/
