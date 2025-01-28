@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import Counter from "../Counter/Counter"
+import SoldCount from "../Sold Count/SoldCount"
 import { updateCart } from "./CartLogic"
 import { Fragment, useState } from "react"
 import { NavLink } from "react-router-dom"
@@ -143,7 +144,10 @@ function CartItems({
       </div>
       <div className={styles.item_info}>
         <div className={styles.item_heading}>
-          <p>{item.title}</p>
+          <div className={styles.heading_sold}>
+            <h2>{item.title}</h2>
+            <SoldCount rate={item.rating.rate} count={item.rating.count} /> 
+          </div>
           <p className={styles.price}>${parseFloat(item.price).toFixed(2)}</p>
         </div>
         <p>{isShippingFree ? "Free shipping" : "Free shipping over $45"}</p>
@@ -168,7 +172,11 @@ CartItems.propTypes = {
         price: PropTypes.number,
         description: PropTypes.string,
         image: PropTypes.string,
-        value: PropTypes.number.isRequired,  
+        value: PropTypes.number.isRequired,
+        rating: PropTypes.shape({
+          rate: PropTypes.number,
+          count: PropTypes.number
+        })  
     }),
     removeItem: PropTypes.func,
     cart: PropTypes.arrayOf(

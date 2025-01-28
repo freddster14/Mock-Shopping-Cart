@@ -1,0 +1,18 @@
+.sold_count {
+  margin: 0;
+  background-color: #ff3f1a;
+  width: fit-content;
+  padding: 0px 5px;
+  font-size: 0.85em;
+  font-family: "amazon-ember-bold";
+  border-radius: 9px;
+}
+
+
+.sold_count_s {
+  margin: 0;
+  background-color: #ff3f1a;
+  width: fit-content;
+  padding: 0px 5px;
+  border-radius: 9px;
+}

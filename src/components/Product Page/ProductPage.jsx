@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import styles from './ProductPage.module.css'
 import Rating from "../Rating/Rating"
+import SoldCount from "../Sold Count/SoldCount"
 import BuyModal from "./BuyModal"
 import { useState } from "react"
 import Counter from "../Counter/Counter"
@@ -34,6 +35,7 @@ function ProductPage({
           <img src={item.image} alt={item.title} className={styles.image}/>
         </div>
         <div className={styles.info}>
+          <SoldCount rate={item.rating.rate} count={item.rating.count} />
           <h1 className={styles.title}>{item.title}</h1>
           <Rating itemRate={item.rating}/>
           <h2 className={styles.price}>${parseFloat(item.price).toFixed(2)}</h2>
