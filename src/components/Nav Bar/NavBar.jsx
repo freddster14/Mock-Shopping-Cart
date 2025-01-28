@@ -1,6 +1,7 @@
 import { useNavigate, NavLink, useParams, useLocation } from "react-router-dom"
 import styles from './NavBar.module.css'
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 function NavBar({ cartLength }) {
   const navigate = useNavigate();
@@ -48,6 +49,10 @@ function NavBar({ cartLength }) {
       </nav>
     </>
   )
+}
+
+NavBar.propTypes = {
+  cartLength: PropTypes.number,
 }
 
 export default NavBar 
