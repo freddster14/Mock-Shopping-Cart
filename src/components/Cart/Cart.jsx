@@ -43,52 +43,66 @@ function Cart({
   }
   return (
     <div className={styles.body}>
-      <div className={styles.heading}>
-          <h1>Shopping Cart</h1>
-          <h2>Price</h2>
-      </div>
-      <div className={styles.data_container}>
-        <div className={styles.cart_container}>
-          <ul className={styles.list_items}>
-            {cart.map((item) => (
-              <Fragment key={item.id}>
-                <li  className={styles.item_card}>
-                <CartItems
-                  cart={cart}
-                  item={item}
-                  setCart={setCart}
-                  removeItem={removeItem}
-                  cartInfo={cartInfo}
-                />
-                </li>
-              </Fragment>
-            ))}
-            <p className={styles.sub_total}>
-              Subtotal ({cartInfo.quantity}) 
-              <span>${(cartInfo.subTotal).toFixed(2)}</span>
-            </p>      
-          </ul>
-        </div>
-        <div className={styles.total_container}>
-          <p>
-            Item 
-            {cartInfo.quantity > 1 
-              ? `s (${cartInfo.quantity})` 
-              : ` (${cartInfo.quantity})`
+      {cart.length === 0 
+      ?
+        <>
+          <h1 className={styles.empty_title}>Your MockBox Cart is empty</h1>
+          <p>Check out our  <NavLink className={styles.home_link}  to="/">latest drop and HOT items.</NavLink></p>
+        </>
+      : 
+        <>
+          <div className={styles.heading}>
+            <h1>Shopping Cart</h1>
+            <h2>Price</h2>
+          </div>
+          <div className={styles.data_container}>
+            <div className={styles.cart_container}>
+              <ul className={styles.list_items}>
+                {cart.map((item) => (
+                  <Fragment key={item.id}>
+                    <li  className={styles.item_card}>
+                    <CartItems
+                      cart={cart}
+                      item={item}
+                      setCart={setCart}
+                      removeItem={removeItem}
+                      cartInfo={cartInfo}
+                    />
+                    </li>
+                  </Fragment>
+                ))}
+                <p className={styles.sub_total}>
+                  Subtotal ({cartInfo.quantity}) 
+                  <span>${(cartInfo.subTotal).toFixed(2)}</span>
+                </p>      
+              </ul>
+            </div>
+            {cart.length > 0 &&
+            <div className={styles.total_container}>
+              <p>
+                Item 
+                {cartInfo.quantity > 1 
+                  ? `s (${cartInfo.quantity})` 
+                  : ` (${cartInfo.quantity})`
+                }
+                <span>
+                ${(cartInfo.subTotal).toFixed(2)}
+                </span>
+              </p>
+              <p>
+                Shipping 
+                <span>{ cartInfo.shipping ? "$" + cartInfo.shipping : "Free"}</span>
+              </p>
+              <div className={styles.line}></div>
+              <p className={styles.sub_total}>Subtotal <span>${(cartInfo.subTotal + cartInfo.shipping).toFixed(2)}</span></p>
+              <NavLink className={styles.checkout} to="#">Go to checkout</NavLink>
+            </div>
             }
-            <span>
-            ${(cartInfo.subTotal).toFixed(2)}
-            </span>
-          </p>
-          <p>
-            Shipping 
-            <span>{ cartInfo.shipping ? "$" + cartInfo.shipping : "Free"}</span>
-          </p>
-          <div className={styles.line}></div>
-          <p className={styles.sub_total}>Subtotal <span>${(cartInfo.subTotal + cartInfo.shipping).toFixed(2)}</span></p>
-          <NavLink className={styles.checkout} to="#">Go to checkout</NavLink>
-        </div>
-      </div>
+          </div>
+        </>
+      
+      }
+     
     </div> 
   )
 }

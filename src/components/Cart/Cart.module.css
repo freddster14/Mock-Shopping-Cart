@@ -6,6 +6,18 @@
   margin-top: 25px;
 }
 
+.empty_title {
+  font-size: 2.2em;
+  font-family: 'amazon-ember-bold';
+  margin: 0;
+  margin-top: 35px;
+}
+
+.home_link {
+  text-decoration: underline;
+;
+}
+
 .data_container {
   display: flex;
   justify-content: space-between;
