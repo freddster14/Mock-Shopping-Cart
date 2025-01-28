@@ -21,16 +21,12 @@ function Cart({
       subTotal += (item.price * item.value);
       quantity += item.value
     }
-    subTotal = parseFloat(subTotal);
-    shipping += ((subTotal > 30) ?  0 : 5.99);
+    shipping += ((subTotal > 45) ?  0 : 5.99);
     tax = (subTotal * tax);
 
-    subTotal = subTotal + shipping;
-
-    subTotal = subTotal.toFixed(2);
     tax = tax.toFixed(2);
 
-    total =  parseFloat(subTotal) + parseFloat(tax);
+    total =  parseFloat(subTotal) + parseFloat(tax) + shipping;
     total = total.toFixed(2);
     return {
       quantity: quantity,
@@ -67,7 +63,10 @@ function Cart({
                 </li>
               </Fragment>
             ))}
-            <p className={styles.sub_total}>Subtotal ({cartInfo.quantity}) <span>${cartInfo.subTotal - cartInfo.shipping}</span></p>      
+            <p className={styles.sub_total}>
+              Subtotal ({cartInfo.quantity}) 
+              <span>${(cartInfo.subTotal).toFixed(2)}</span>
+            </p>      
           </ul>
         </div>
         <div className={styles.total_container}>
@@ -78,12 +77,15 @@ function Cart({
               : ` (${cartInfo.quantity})`
             }
             <span>
-            ${cartInfo.subTotal}
+            ${(cartInfo.subTotal).toFixed(2)}
             </span>
           </p>
-          <p>Shipping <span>{cartInfo.total > 35 ? "Free" : "$5.99"}</span></p>
+          <p>
+            Shipping 
+            <span>{ cartInfo.shipping ? "$" + cartInfo.shipping : "Free"}</span>
+          </p>
           <div className={styles.line}></div>
-          <p className={styles.sub_total}>Subtotal <span>${cartInfo.subTotal}</span></p>
+          <p className={styles.sub_total}>Subtotal <span>${(cartInfo.subTotal + cartInfo.shipping).toFixed(2)}</span></p>
           <NavLink className={styles.checkout} to="#">Go to checkout</NavLink>
         </div>
       </div>
@@ -114,7 +116,7 @@ function CartItems({
   cartInfo,
  }) {
   const [quantity, setQuantity] = useState({value: item.value})
-  const isShippingFree = cartInfo.total > 35;
+  const isShippingFree = cartInfo.subTotal > 45;
   function updateQuantity(quantity) {
     const updatedCart = updateCart(cart, item, quantity.value - item.value);
     setQuantity(quantity)
@@ -130,7 +132,7 @@ function CartItems({
           <p>{item.title}</p>
           <p className={styles.price}>${parseFloat(item.price).toFixed(2)}</p>
         </div>
-        <p>{isShippingFree ? "Free shipping" : "Free shipping over $30"}</p>
+        <p>{isShippingFree ? "Free shipping" : "Free shipping over $45"}</p>
         <p>Free returns</p>
         <div className={styles.item_settings}>
           <Counter 
