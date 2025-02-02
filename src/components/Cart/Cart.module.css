@@ -98,6 +98,7 @@
   justify-content: start;
   font-family: 'amazon-ember-bold';
   font-size: 0.67em;
+  margin-top: 2px;
 }
 
 .heading_sold h2 {
@@ -115,7 +116,7 @@
 p.price {
   font-family: 'amazon-ember-bold';
   font-size: 1em;
-  margin-top: 17px;
+  margin-top: 18px;
 }
 
 .item_settings {

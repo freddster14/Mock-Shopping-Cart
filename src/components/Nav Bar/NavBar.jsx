@@ -32,13 +32,13 @@ function NavBar({ cartLength }) {
             Home
             </NavLink>
             <NavLink
-            to={`products/${lastCategory || ""}`}
+            to={`/products/${lastCategory || ""}`}
             className={({isActive}) =>
             isActive ? (styles.link_active) : ""} >
             Products
             </NavLink>
             <NavLink
-            to="cart"
+            to="/cart"
             id={styles.cart_icon}
             className={({isActive}) =>
             isActive ? styles.link_active : ""}>

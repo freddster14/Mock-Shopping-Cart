@@ -23,7 +23,7 @@ function Category({ categoryData }) {
             {Object.keys(categoryData).map(category => (
                 <div key={category} className={styles.category}>
                     <NavLink 
-                    to={`products/${category}`}
+                    to={`/products/${category}`}
                     className={({ isActive }) => 
                         `${isActive ? styles.active : ""} 
                         ${isHomePage ? styles.button_big : styles.button_small}`
@@ -43,7 +43,7 @@ function Category({ categoryData }) {
                 </div>
             ))}
             { !isHomePage &&
-                <NavLink to="products/" 
+                <NavLink to="/products/" 
                 className={({ isActive }) => 
                     `${isActive ? styles.active : ""} 
                     ${isHomePage ? styles.button_big : styles.button_small}`

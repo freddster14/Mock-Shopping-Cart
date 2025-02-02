@@ -13,6 +13,7 @@ function Home() {
   const [cart, setCart] = useLocalStorage("cart", []);
   const [selectedItem, setSelectedItem] = useLocalStorage("selectedItem", "");
   const [categoryData, setCategoryData] = useState();
+  
   useEffect(() => {
     if(data) return
     fetch('https://fakestoreapi.com/products', { mode: 'cors' })
@@ -39,8 +40,7 @@ function Home() {
     })
     
   }, [data, categoryData, setCategoryData])
-
-  if(data === "error") throw new Error("Failed to get Information")
+  if(data === "error") throw new Error("Failed to get Information");
   return (
     <>
       <NavBar cartLength={cart.length}/>
