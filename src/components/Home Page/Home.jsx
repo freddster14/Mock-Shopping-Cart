@@ -24,15 +24,13 @@ function Home() {
     .then(json => { 
       setData(json);
       //Categorize Data
-      if(!categoryData) {
-        let newObj = {};
-        json.forEach(item => {
-          const category = item.category
-          if(!newObj[category]) { newObj[category] = [] }
-          newObj[category].push(item)
-      });
-      setCategoryData(newObj)
-      }
+      let newObj = {};
+      json.forEach(item => {
+        const category = item.category
+        if(!newObj[category]) { newObj[category] = [] }
+        newObj[category].push(item)
+    });
+    setCategoryData(newObj)
     })
     .catch(err => {
       setData("error")
@@ -40,7 +38,7 @@ function Home() {
     })
     
   }, [data, categoryData, setCategoryData])
-  if(data === "error") throw new Error("Failed to get Information");
+  if(data === "error") return null;
   return (
     <>
       <NavBar cartLength={cart.length}/>

@@ -51,6 +51,7 @@
 .link_container .link_active {
     background-color: #294b4e;
     border: 1px solid rgba(27,29,26,1);
+    cursor: none;
 }
 
 #cart_icon {

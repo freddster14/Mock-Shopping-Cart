@@ -4,9 +4,9 @@ function Error() {
   const error = useRouteError()
  return (
     <>
-      <h1>Error</h1>
+      <h1>Something went wrong!</h1>
       <h2>{error.message}</h2>
-      <Link to="/">Go Back Home</Link>
+      <Link to="/">Please try again.</Link>
     </>
  )
 }
