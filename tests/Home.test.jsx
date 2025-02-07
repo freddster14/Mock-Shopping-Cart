@@ -1,20 +1,45 @@
 import { MemoryRouter, useParams } from "react-router-dom";
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import Home from "../src/components/Home Page/Home";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";
 
+//Mock fetch
 const server = setupServer(
   http.get('https://fakestoreapi.com/products', () => {
     return HttpResponse.json([
       {
         id: 1,
-        title: "Samsung TV 50inch",
-        price: 999,
+        title: "Samsung TV",
         category: "electronics",
-        description: "Top notch built quality, Super Older screen, 4k resolution, and 120hz refresh rate for those gamers!",
       },
+      {
+        id: 2,
+        title: "Adidas Shoes",
+        category: "shoes",
+      },
+      {
+        id: 3,
+        title: "iPhone",
+        category: "electronics",
+      },
+      {
+        id: 4,
+        title: "Dell Laptop",
+        category: "electronics",
+      },
+      
+      {
+        id: 5,
+        title: "Nike Shoes",
+        category: "shoes",
+      },
+      {
+        id: 6,
+        title: "Puma Shoes",
+        category: "shoes",
+      }
     ])
   })
 )
@@ -37,7 +62,17 @@ vi.mock("/src/components/Product Page/ProductPage.jsx", () => ({
 }));
 
 vi.mock("/src/components/Products/Products.jsx", () => ({
-  default: () => <div>Products</div>
+  default: ({items}) => (
+    <>
+     <div>Products</div>
+    {items && 
+      items.map(item => (
+        <div key={item.id}>{item.title}</div>
+      ))
+    }
+    </>
+   
+)
 }));
 
 vi.mock("/src/components/Cart/Cart.jsx", () => ({
@@ -48,7 +83,21 @@ vi.mock("/src/components/Feature/Feature.jsx", () => ({
   default: ({data, categoryData, setSelectedItem}) => (
   <>
     <div>Feature</div>
-    <div>{data && data[0].title}</div>
+    { categoryData &&
+      Object.keys(categoryData).map((key) => {
+        let sameCategory = true;
+        categoryData[key].map((item) => {
+          if(key !== item.category) return sameCategory = false
+          
+        })
+        if(!sameCategory) {
+          return (<div key={key}>not same category</div>)
+        } else {
+          return <div key={key}>same category</div>
+        }
+        
+      })
+    }
   </>
 )
 }));
@@ -57,16 +106,15 @@ vi.mock("/src/components/Feature/Feature.jsx", () => ({
 
 
 describe("Home Component", () => {
-  const renderHome = (params) => {
+  const renderHome = async (params) => {
     useParams.mockReturnValue({name: params})
-    render(
+    return render(
       <MemoryRouter>
         <Home />
       </MemoryRouter>
     )
   };
 
- 
   describe("Home params logic", () => {
 
     it("render of Feature when params is undefined", async () => {
@@ -104,12 +152,33 @@ describe("Home Component", () => {
     afterAll(() => {
       server.close()
     })
-    it("fetches data from fakestoreapi", async () => {
+    it("fetches data from fakestoreapi and display on products page", async () => {
+      renderHome("products")
+      expect(await screen.findByText("Products")).toBeInTheDocument();
+      expect(await screen.findByText("Samsung TV")).toBeInTheDocument();
+      expect(await screen.getByText("Puma Shoes")).toBeInTheDocument();
+    });
+    it("fetches data from fakestoreapi and categorizes it", async () => {
+        renderHome(undefined)
+        const categoryConfirm = await screen.findAllByText(/same category/i);
+        expect(await screen.findByText("Feature")).toBeInTheDocument();
+        categoryConfirm.forEach((e) => {
+          expect(e.textContent).toBe("same category");
+          expect(e.textContent).not.toBe("not same category")
+        })
+    });
+    it("display error message when server return error", async () => {
+      const consoleError = vi.spyOn(console, "error");
+      server.use(
+        http.get("https://fakestoreapi.com/products", () => {
+          return new HttpResponse(null, { status: 500 });
+        })
+      );
       renderHome(undefined)
-      expect(await screen.findByText("Feature")).toBeInTheDocument();
-      expect(await screen.findByText("NavBar")).toBeInTheDocument();
-      expect(await screen.findByText("Samsung TV 50inch")).toBeInTheDocument();
-   })
-
+      const expectedError = new Error("Server Error")
+      await waitFor(() => {
+        expect(consoleError).toHaveBeenCalledWith(expectedError);
+      })
+    })
   })
 })
