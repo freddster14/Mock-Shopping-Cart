@@ -80,7 +80,7 @@ vi.mock("/src/components/Cart/Cart.jsx", () => ({
 }));
 
 vi.mock("/src/components/Feature/Feature.jsx", () => ({
-  default: ({data, categoryData, setSelectedItem}) => (
+  default: ({categoryData}) => (
   <>
     <div>Feature</div>
     { categoryData &&
