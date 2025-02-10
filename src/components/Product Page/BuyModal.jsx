@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import styles from './BuyModal.module.css'
 import { NavLink } from "react-router-dom"
 
@@ -44,6 +45,13 @@ function BuyModal({
       </div>
     </div>  
   )
+}
+
+BuyModal.propTypes = {
+  item: PropTypes.object, 
+  setUserAddToCart: PropTypes.func, 
+  cart: PropTypes.array, 
+  setCart: PropTypes.func, 
 }
 
 export default BuyModal
