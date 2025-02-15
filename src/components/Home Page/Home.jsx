@@ -41,7 +41,7 @@ function Home() {
   if(data === "error") return null;
   return (
     <>
-      <NavBar cartLength={cart.length}/>
+      <NavBar cart={cart}/>
       {  name === "product-page" ?
         <ProductPage
         item={selectedItem}

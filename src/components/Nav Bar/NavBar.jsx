@@ -3,12 +3,16 @@ import styles from './NavBar.module.css'
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-function NavBar({ cartLength }) {
+function NavBar({ cart }) {
   const navigate = useNavigate();
   const { category } = useParams();
   const [lastCategory, setLastCategory] = useState();
   const location = useLocation();
   const isProductsPage = location.pathname.includes("products");
+  const getCartItems = () => {
+    return cart.reduce((quantity, item) => quantity + item.value, 0);
+  }
+
   //Keeps track of category
   useEffect(() => {
     if(isProductsPage) {
@@ -42,7 +46,7 @@ function NavBar({ cartLength }) {
             id={styles.cart_icon}
             className={({isActive}) =>
             isActive ? styles.link_active : ""}>
-            🛒<span className={styles.cart_quantity}>{cartLength}</span>
+            🛒<span className={styles.cart_quantity}>{getCartItems()}</span>
             </NavLink>
           </div>
         </div>
@@ -52,7 +56,7 @@ function NavBar({ cartLength }) {
 }
 
 NavBar.propTypes = {
-  cartLength: PropTypes.number,
+  cart: PropTypes.array,
 }
 
 export default NavBar 
