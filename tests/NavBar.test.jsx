@@ -3,15 +3,16 @@ import NavBar from "../src/components/Nav Bar/NavBar";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import categoryData from "./MockData";
 
 describe("NavBar Component", () => {
-  const cartLength = 3;
+  const cart = Object.values(categoryData).flat()
   const user = userEvent.setup();
 
   const renderNavBar = (startingLocation) => {
     render(
       <MemoryRouter initialEntries={[startingLocation]} >
-      <NavBar cartLength={cartLength}/>
+      <NavBar cart={cart}/>
       <Routes>
         <Route path="/" element={<div>home page</div>} />
         <Route path="/products" element={<div>products page</div>} />
@@ -31,7 +32,7 @@ describe("NavBar Component", () => {
       expect(screen.getByText("Home")).toBeInTheDocument();
       expect(screen.getByText("Products")).toBeInTheDocument();
       expect(screen.getByText("🛒")).toBeInTheDocument();
-      expect(screen.getByText(cartLength)).toBeInTheDocument();
+      expect(screen.getByText(10)).toBeInTheDocument();
     });
 
     it("renders Home NavLink as active initially", () => {

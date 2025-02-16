@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import Products from "../src/components/Products/Products";
 import NavBar from "../src/components/Nav Bar/NavBar";
 import { useParams, MemoryRouter, useLocation } from "react-router-dom";
-
+import categoryData from "./MockData";
 
 //Mock react-router-dom
 vi.mock("react-router-dom", async (importOriginal) => {
@@ -16,18 +16,7 @@ vi.mock("react-router-dom", async (importOriginal) => {
 })
 
 describe("Products Component", () => {
-  const categoryData = {
-    electronics: [
-      { id: 1, title: "Samsung TV", category: "electronics", image: "", price: 1, rating: {rate: 1, count: 100} },
-      { id: 3, title: "iPhone", category: "electronics", image: "", price: 5, rating: {rate: 5, count: 200} },
-      { id: 4, title: "Dell Laptop", category: "electronics", price: 10, image: "", rating: {rate: 3, count: 300} },
-    ],
-    shoes: [
-      { id: 2, title: "Adidas Shoes", category: "shoes", price: 100, image: "", rating: {rate: 2, count: 400} },
-      { id: 5, title: "Nike Shoes", category: "shoes", price: 50, image: "", rating: {rate: 4, count: 500} },
-      { id: 6, title: "Puma Shoes", category: "shoes", price: 30, image: "", rating: {rate: 3.3, count: 600} },
-    ]
-  }
+  
 
   const selected = vi.fn();
   const items = Object.values(categoryData).flat();
@@ -37,7 +26,7 @@ describe("Products Component", () => {
     return (
       <>
         <p>{location.pathname}</p>
-        <NavBar cartLength={0}/>
+        <NavBar cart={items}/>
         <Products items={items} setSelectedItem={selected} categoryData={categoryData} />
       </>
     );
