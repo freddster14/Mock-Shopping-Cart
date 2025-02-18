@@ -41,7 +41,13 @@ describe("Product Page Component", () => {
     expect(screen.getByText("$1099.00")).toBeInTheDocument();
     expect(screen.getByText("4.3")).toBeInTheDocument();
     expect(screen.getByText("400 ratings")).toBeInTheDocument();
-  })
+    expect(screen.getByText(
+      /All new Samsung TV with latest tech. New Super Oled and 120hz refresh rate for gamers. Up to 8k/i
+    )).toBeInTheDocument()
+    expect(screen.getByText("Details")).toBeInTheDocument();
+    expect(screen.getByText("Returns")).toBeInTheDocument();
+    expect(screen.getByText("Warranty")).toBeInTheDocument();
+  });
 
   it("displays Add to Cart button when quantity > 0", async () => {
     const user = userEvent.setup();
@@ -66,6 +72,18 @@ describe("Product Page Component", () => {
     expect(inCartText).toBeInTheDocument();
     expect(screen.getByText("See in cart")).toBeInTheDocument();
     expect(screen.getByText("Remove item")).toBeInTheDocument();
+  })
 
+  it("display dropdown information on click", async () => {
+    const user = userEvent.setup();
+    renderProductPage();
+    expect(screen.queryByText(
+      /Free standard shipping on orders over $35. On most stores/i
+    )).not.toBeInTheDocument();
+
+    await user.click(screen.getByText('Shipping'));
+    expect(screen.queryByText(
+      /Free standard shipping on orders over/i
+    )).toBeInTheDocument();
   })
 })
