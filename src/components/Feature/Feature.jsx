@@ -10,25 +10,30 @@ import { useEffect } from "react"
 function Feature ({ data, setSelectedItem, categoryData, }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
   useEffect(() => {
-    if(!data) {
-      setFeatureItems('')
+    if (!data) {
+      setFeatureItems(""); 
+      return;
     }
-  },[data, setFeatureItems])
 
-  function randomIndex(array) {
-    if(array && !featureItems) {
-      let indexArray = []
-    let subArray = []
-    //Card items append
-    while(indexArray.length !== 5 ) {
-        let index = Math.floor(Math.random() * array.length)
-        if(!indexArray.includes(array[index])) indexArray.push(array[index]);
+    function getRandomItems(array) {
+      if (!array || array.length < 5) return; 
+
+      let indexArray = new Set();
+      while (indexArray.size < 5) {
+        indexArray.add(array[Math.floor(Math.random() * array.length)]);
+      }
+      const selectedItems = Array.from(indexArray);
+      return [selectedItems[0], selectedItems.slice(1)];
     }
-    subArray = indexArray.slice(1)
-    setFeatureItems([indexArray[0], subArray])
+
+    if (!featureItems) {
+      const randomSelection = getRandomItems(data);
+      if (randomSelection) {
+        setFeatureItems(randomSelection);
+      }
     }
-  }
-  randomIndex(data)
+  }, [data, featureItems, setFeatureItems]);
+  
   return (
     <FeatureContent 
     heroItem={featureItems[0]}
