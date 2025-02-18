@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 describe("Sold Count Component", () => {
   const renderSoldCount = (rating) => {
-    const { rate, count} = rating;
+    const { rate, count } = rating;
     render(
       <MemoryRouter initialEntries={['/cart']}>
         <SoldCount rate={rate} count={count} />
