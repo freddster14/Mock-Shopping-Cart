@@ -57,7 +57,7 @@ function Products({
   return (
     <>
       <nav className={styles.nav}>
-        <Category categoryData={categoryData} setDisplayItems={setDisplayItems} items={items}/>
+        <Category categoryData={categoryData}/>
         <select className={styles.select} name="sort" id="sort" onChange={(e) => handleSortChange(e.target.value)} >
           <option value="">Sort By</option>
           <option value="price-ascending">Price: Ascending</option>
