@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import ProductPage from "../../src/components/Product Page/ProductPage";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -61,15 +61,16 @@ describe("Product Page Component", () => {
     const user = userEvent.setup();
     renderProductPage()
     const plusQuantity = screen.getByText("+")
-
+    // Adds 2 of item
     await user.click(plusQuantity);
-    const addToCart = screen.getByText("Add To Cart");
-    await user.click(addToCart);
+    await user.click(plusQuantity);
+    await user.click(screen.getByText("Add To Cart"));
 
-    const confirmation = screen.getByText("Added to cart")
-    const inCartText = screen.getByText("In Cart")
-    expect(confirmation).toBeInTheDocument();
-    expect(inCartText).toBeInTheDocument();
+    expect(screen.getByText("Added to cart")).toBeInTheDocument();
+    expect(screen.getByText("Price")).toBeInTheDocument();
+    expect(within(screen.getByText("Price")).getByText("$1099.00")).toBeInTheDocument()
+    expect(screen.getByText("In Cart")).toBeInTheDocument();
+    expect(within(screen.getByText("In Cart")).getByText("2")).toBeInTheDocument();
     expect(screen.getByText("See in cart")).toBeInTheDocument();
     expect(screen.getByText("Remove item")).toBeInTheDocument();
   })
