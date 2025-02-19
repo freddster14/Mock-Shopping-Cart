@@ -87,7 +87,7 @@ function FeatureContent ({
             {subItems.map((item => (
                 <div className={styles.sub_item} key={item.id} onClick={() => eventFunction(item)}>
                   <div className={styles.sub_image_container}>
-                    <img src={item.image} alt={item.title} />
+                    <img className={styles.sub_image} src={item.image} alt={item.title} />
                   </div>
                   <div className={styles.sub_item_info}>
                     <h2>{item.title}</h2>
