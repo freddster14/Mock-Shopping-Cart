@@ -1,8 +1,8 @@
 import { describe, expect, it, } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Cart from "../src/components/Cart/Cart";
-import NavBar from "../src/components/Nav Bar/NavBar";
+import Cart from "../../src/components/Cart/Cart";
+import NavBar from "../../src/components/Nav Bar/NavBar";
 import { MemoryRouter} from "react-router-dom";
 import { useState } from "react";
 

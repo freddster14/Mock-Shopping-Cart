@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import Rating from "../src/components/Rating/Rating";
+import Rating from "../../src/components/Rating/Rating";
 
 describe("Rating Component", () => {
   const renderRating = (itemRating, url = "/") => {

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import ProductPage from "../src/components/Product Page/ProductPage";
+import ProductPage from "../../src/components/Product Page/ProductPage";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
@@ -57,7 +57,7 @@ describe("Product Page Component", () => {
     expect(screen.getByText("Add To Cart")).toBeInTheDocument();
   })
 
-  it("display modal when added product to cart", async () => {
+  it("display Buy Modal when added product to cart", async () => {
     const user = userEvent.setup();
     renderProductPage()
     const plusQuantity = screen.getByText("+")

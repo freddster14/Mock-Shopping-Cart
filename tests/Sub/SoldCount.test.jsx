@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import SoldCount from "../src/components/Sold Count/SoldCount";
+import SoldCount from "../../src/components/Sold Count/SoldCount";
 import { MemoryRouter } from "react-router-dom";
 
 describe("Sold Count Component", () => {

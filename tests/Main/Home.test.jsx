@@ -1,6 +1,6 @@
 import { MemoryRouter, useParams } from "react-router-dom";
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import Home from "../src/components/Home Page/Home";
+import Home from "../../src/components/Home Page/Home";
 import { render, screen, waitFor } from "@testing-library/react";
 import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";

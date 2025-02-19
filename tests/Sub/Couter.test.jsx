@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import Counter from "../src/components/Counter/Counter";
+import Counter from "../../src/components/Counter/Counter";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 

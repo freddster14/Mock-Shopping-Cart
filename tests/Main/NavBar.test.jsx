@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import NavBar from "../src/components/Nav Bar/NavBar";
+import NavBar from "../../src/components/Nav Bar/NavBar";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import categoryData from "./MockData";
+import categoryData from "../MockData";
 
 describe("NavBar Component", () => {
   const cart = Object.values(categoryData).flat()

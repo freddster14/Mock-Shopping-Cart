@@ -1,10 +1,10 @@
 import { describe, expect, it, vi, } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Feature from "../src/components/Feature/Feature";
-import NavBar from "../src/components/Nav Bar/NavBar";
+import Feature from "../../src/components/Feature/Feature";
+import NavBar from "../../src/components/Nav Bar/NavBar";
 import { MemoryRouter, useLocation } from "react-router-dom";
-import categoryData from "./MockData";
+import categoryData from "../MockData";
 
 
 
