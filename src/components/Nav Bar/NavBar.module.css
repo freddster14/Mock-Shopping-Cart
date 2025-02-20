@@ -1,9 +1,11 @@
 .nav {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     position: sticky;
     z-index: 1;
     top: 0px;
+    width: 100%;
+    height: 75px;
     justify-content: space-between;
     background: #1b1d1a;
     background: linear-gradient(90deg, rgba(27,29,26,1) 2%, #294b4e 65%, #44797f 100%);
@@ -14,9 +16,7 @@
     font-family: 'amazon-ember-bold';
     justify-content: space-between;
     align-items: center;
-    padding: 0px 25px;
-    width: 100%;
-    max-width: 1500px;
+    width: min(1500px, 97%);
     font-size: 1.1em;
     margin: 0 auto;
 }
