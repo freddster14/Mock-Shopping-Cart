@@ -70,3 +70,9 @@
     max-height: 75%;
 }
 
+@media only screen and (max-width: 1000px) {
+  .categories {
+    grid-template-columns: repeat(2, minmax(180px, 30%));
+  }
+
+}
