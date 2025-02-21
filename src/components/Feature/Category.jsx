@@ -1,7 +1,9 @@
 import PropTypes from "prop-types"
+import HamburgerMenu from "../Products/HamburgerMenu";
 import Loading from "../Route/Loading"
 import styles from './Category.module.css'
 import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 function capitalizeFirstWord(str) {
   if(!str) return "";
@@ -15,13 +17,15 @@ function capitalizeFirstWord(str) {
 function Category({ categoryData }) {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
-
+  const [display, setDisplay] = useState(false)
   if(!categoryData) return <Loading styleName={styles.categories_loading}/>
 
   return (
-    <div className={isHomePage ? styles.categories : styles.small_categories}>
+    <>
+    {!isHomePage && <HamburgerMenu  menuDisplay= {display} setMenuDisplay={setDisplay}/>}
+    <div className={`${isHomePage ? styles.categories : styles.small_categories} ${(!display && !isHomePage) && (styles.hide)}`}>
       {Object.keys(categoryData).map(category => (
-        <div key={category} className={styles.category}>
+        <div key={category} className={`${styles.category}`}>
           <NavLink 
           to={`/products/${category}`}
           className={({ isActive }) => 
@@ -43,15 +47,20 @@ function Category({ categoryData }) {
         </div>
       ))}
       { !isHomePage &&
-        <NavLink to="/products/" 
+      <div key={'all'} className={styles.category}>
+           <NavLink to="/products/" 
         className={({ isActive }) => 
           `${isActive ? styles.active : ""} 
-          ${styles.button_small}`
+          ${styles.button_small}
+          `
           .trim()
         }
         end>All</NavLink>
+      </div>
       }
     </div>
+    </>
+    
   )
 }
 

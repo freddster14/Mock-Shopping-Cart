@@ -2,10 +2,14 @@
     position: sticky;
     top: 75px;
     display: flex;
-    width: min(1500px, 95%);
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: min(1500px, 100%);
+    height: 40px;
     margin: 0 auto;
     background-color: rgb(27, 29, 26);
-    padding: 5px 0px;
+    padding: 5px 1.5%;
     box-shadow: 0px 4px 30px rgb(27, 29, 26);
 }
 
@@ -23,7 +27,6 @@
     outline: none;
     font-family: 'amazon-ember-bold';
     padding: 5px 1px;
-    margin-left: auto;
 }
 
 .items_container{
@@ -40,15 +43,14 @@
 }
 
 .item_container{
-    width: 20%;
+    width: 0%;
     height: 20%;
     min-width: 200px;
     min-height: 200px;
 }
 
 .image_container {
-    width: 100%;
-    height: 20vw;
+    aspect-ratio: 1/1;
     max-height: 300px;
     background-color: white;
     display: flex;
@@ -83,7 +85,32 @@
 
 .all:hover{transform: scale(1.05);}
 
-@media only screen and (max-width: 750px) {
+.hamburger {
+  display: none;
+  width: 28px;
+  color: white;
+  margin-right: 30px;
+  transition: all 0.2s ease-in-out;
+}
 
+.hamburger_active {
+  transform: rotate(90deg);
+}
+
+@media only screen and (max-width: 1000px) {
+  .image_container {
+    height: 50%;
+    aspect-ratio: 1/1;
+  }
+
+  .select {
+    height: 32px;
+  }
   
+}
+
+@media only screen and (max-width: 615px) {
+  .hamburger {
+   display: block;
+  }  
 }

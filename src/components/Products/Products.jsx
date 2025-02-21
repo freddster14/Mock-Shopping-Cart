@@ -57,14 +57,14 @@ function Products({
   return (
     <>
       <nav className={styles.nav}>
-        <Category categoryData={categoryData}/>
-        <select className={styles.select} name="sort" id="sort" onChange={(e) => handleSortChange(e.target.value)} >
+      <select className={styles.select} name="sort" id="sort" onChange={(e) => handleSortChange(e.target.value)} >
           <option value="">Sort By</option>
           <option value="price-ascending">Price: Ascending</option>
           <option value="price-descending">Price: Descending</option>
           <option value="rating-ascending">Rating: Ascending</option>
           <option value="rating-descending">Rating: Descending</option>
-        </select>
+      </select>
+      <Category categoryData={categoryData}/>
       </nav>
       <DisplayItems displayItems={displayItems} setSelectedItem={setSelectedItem}/>
     </>
