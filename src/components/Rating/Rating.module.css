@@ -1,7 +1,7 @@
 .rating_container, .rating_container_home, .rating_container_buy{
     display: flex;
     gap: 3px;
-    font-size: 0.8em;
+    font-size: 1.1em;
     align-items: center;
     margin: 3px 0px;
 }
@@ -10,11 +10,6 @@
     justify-content: center;
 }
 
-.rating_container_buy {
-   
-    font-size: 1.1em;
-    
-}
 .rate, .count{
     margin: 0px;
     margin-top: 3px;
@@ -29,6 +24,6 @@
 }
 
 .star{
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
 }
