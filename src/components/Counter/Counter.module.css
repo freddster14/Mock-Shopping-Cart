@@ -3,6 +3,7 @@
     border-radius: 10px;
     padding: 3px 10px;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 .minus, .plus {
@@ -30,8 +31,4 @@
     font-size: 0.9em;
     max-width: 40px;
     border: none;
-}
-
-.input:hover {
-  
 }

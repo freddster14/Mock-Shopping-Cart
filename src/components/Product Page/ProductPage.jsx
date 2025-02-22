@@ -119,7 +119,7 @@ function DropDownInfo({ title, info, link  }) {
         onClick={dropDown}
       >
         <h2>{title}</h2>
-        <p className={styles.drop_symbol}>{isActive ? "⯅"  : "▼"}</p>
+        <p className={`${styles.drop_symbol} ${isActive && styles.drop_symbol_active}`}>▼</p>
       </div>
       {isActive && 
         <p className={styles.drop_down_info}>{info}. {link && <a>See details</a>}</p>
