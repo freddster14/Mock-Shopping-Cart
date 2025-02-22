@@ -18,16 +18,16 @@ export default function Rating({ itemRate }) {
     for(let i = 0; i < 5; i++) {
       if(stars > i) {
         starElements.push(
-          <img key={i} src="/src/assets/fullstar.png" alt="Star" className={styles.star}/>
+          <img key={i} src="src/assets/fullstar.png" alt="Star" className={styles.star}/>
         )
       } else if(halfStar) {
         starElements.push(
-          <img key={i} src="/src/assets/halfstar.png" alt="Half Star" className={styles.star}/>
+          <img key={i} src="src/assets/halfstar.png" alt="Half Star" className={styles.star}/>
         )
         halfStar = false
       } else {
         starElements.push(
-          <img key={i} src="/src/assets/emptystar.png" alt="Empty Star" className={styles.star}/>
+          <img key={i} src="src/assets/emptystar.png" alt="Empty Star" className={styles.star}/>
         )
       }
     }
