@@ -17,12 +17,17 @@ export default function HamburgerMenu ({ menuDisplay ,setMenuDisplay }) {
     return () => window.removeEventListener('resize', handleResize)
   }, [setMenuDisplay]);
 
+
+  useEffect(() => {
+    if(!menuDisplay) setIsActive(false)
+  }, [menuDisplay])
+
+
   const handleClick = () => {
     setIsActive(!isActive)
     setMenuDisplay(!menuDisplay)
   }
 
-  
   
   return (
     <>

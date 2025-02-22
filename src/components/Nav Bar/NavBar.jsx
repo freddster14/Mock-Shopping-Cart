@@ -19,6 +19,12 @@ function NavBar({ cart }) {
       setLastCategory(category)
     }
   }, [category, isProductsPage])
+
+  const scrollTo = () => {
+    window.scrollTo({
+      top:0,
+    });
+  }
   return (
     <>
       <nav className={styles.nav}>
@@ -31,12 +37,14 @@ function NavBar({ cart }) {
           <div className={styles.link_container}>
             <NavLink
             to="/"
+            onClick={scrollTo}
             className={({isActive}) =>
             isActive ? styles.link_active : ""}>
             Home
             </NavLink>
             <NavLink
             to={`/products/${lastCategory || ""}`}
+            onClick={scrollTo}
             className={({isActive}) =>
             isActive ? (styles.link_active) : ""} >
             Products
@@ -44,6 +52,7 @@ function NavBar({ cart }) {
             <NavLink
             to="/cart"
             id={styles.cart_icon}
+            onClick={scrollTo}
             className={({isActive}) =>
             isActive ? styles.link_active : ""}>
             🛒<span className={styles.cart_quantity}>{getCartItems()}</span>

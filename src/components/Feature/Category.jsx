@@ -20,6 +20,14 @@ function Category({ categoryData }) {
   const [display, setDisplay] = useState(false)
   if(!categoryData) return <Loading styleName={styles.categories_loading}/>
 
+  const handleSidebar = () => {
+    setDisplay(false);
+    window.scrollTo({
+      top:0,
+      behavior: 'smooth'
+    });
+  }
+
   return (
     <>
     {!isHomePage && <HamburgerMenu  menuDisplay= {display} setMenuDisplay={setDisplay}/>}
@@ -28,6 +36,7 @@ function Category({ categoryData }) {
         <div key={category} className={`${styles.category}`}>
           <NavLink 
           to={`/products/${category}`}
+          onClick={handleSidebar}
           className={({ isActive }) => 
             `${isActive ? styles.active : ""} 
             ${isHomePage ? styles.button_big : styles.button_small}`
@@ -48,8 +57,9 @@ function Category({ categoryData }) {
       ))}
       { !isHomePage &&
       <div key={'all'} className={styles.category}>
-           <NavLink to="/products/" 
-        className={({ isActive }) => 
+          <NavLink to="/products/"
+          onClick={handleSidebar} 
+          className={({ isActive }) => 
           `${isActive ? styles.active : ""} 
           ${styles.button_small}
           `

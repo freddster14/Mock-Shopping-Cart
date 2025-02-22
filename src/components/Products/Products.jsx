@@ -64,7 +64,7 @@ function Products({
           <option value="rating-ascending">Rating: Ascending</option>
           <option value="rating-descending">Rating: Descending</option>
       </select>
-      <Category categoryData={categoryData}/>
+      <Category categoryData={categoryData} />
       </nav>
       <DisplayItems displayItems={displayItems} setSelectedItem={setSelectedItem}/>
     </>
