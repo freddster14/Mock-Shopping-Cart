@@ -1,7 +1,6 @@
 .body {
   gap: 20px;
-  padding: 0 25px 75px 25px;
-  max-width: 1500px;
+  width: min(1500px, 97%);
   margin: 0 auto;
   margin-top: 25px;
 }
@@ -196,8 +195,6 @@ p.price {
 @media only screen and (max-width: 1000px) {
   .body {
     width: 95%;
-    padding: 0;
-    place-items: center;
   }
 
   .heading {
@@ -205,6 +202,7 @@ p.price {
   }
   .data_container {
     flex-direction: column-reverse;
+    width: 100%;
     padding-bottom: 55px ;
   }
 
