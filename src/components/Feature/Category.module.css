@@ -84,7 +84,7 @@
  
   .small_categories{
     position: fixed;
-    top: 125px;
+    top: 120px;
     left: 100%;
     transform: translateX(-100%);
     justify-content: flex-end;
@@ -113,7 +113,7 @@
     content: "";
     display: inline-block;
     border: 1px solid white;
-    width: 90%;
+    width: 80%;
     position: fixed;
     left: 50%;
     margin-top: 42px;

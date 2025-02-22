@@ -16,7 +16,7 @@
     font-family: 'amazon-ember-bold';
     justify-content: space-between;
     align-items: center;
-    width: min(1500px, 97%);
+    width: min(1500px, 95%);
     font-size: 1.1em;
     margin: 0 auto;
 }
@@ -70,4 +70,15 @@
 
 .quantity_active {
     background-color: #1b1d1a;
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .nav{
+    height: 70px;
+  }
+
+  .cart_quantity{
+    top: 20px;
+  }
 }
