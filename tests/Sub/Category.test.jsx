@@ -22,7 +22,7 @@ describe("Category Component", () => {
     expect(screen.getAllByRole('img').length).toBe(2);
   });
 
-  it("renders correct data when on Poducts Page", () => {
+  it("renders correct data when on Products Page", () => {
     renderCategory('/products/');
     
     expect(screen.getByText("Electronics")).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe("Category Component", () => {
     expect(screen.getByText("Shoes")).toHaveClass(/button_small/);
     expect(screen.getByText("All")).toBeInTheDocument();
     expect(screen.getByText("All")).toHaveClass(/button_small/);
-    expect(screen.queryByRole('img')).toBe(null);
+    expect(screen.getByAltText('side bar button')).toBeInTheDocument(); // Hamburger Image
   });
 
 })
