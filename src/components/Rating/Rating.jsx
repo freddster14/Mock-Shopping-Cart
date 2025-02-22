@@ -1,5 +1,8 @@
 import { useLocation } from "react-router-dom";
-import styles from "./Rating.module.css"
+import styles from "./Rating.module.css";
+import fullStarImg from '../../assets/fullstar.png';
+import emptyStarImg from '../../assets/emptystar.png';
+import halfStarImg from '../../assets/halfstar.png';
 
 export default function Rating({ itemRate }) {
   const {rate, count} = itemRate;
@@ -18,16 +21,16 @@ export default function Rating({ itemRate }) {
     for(let i = 0; i < 5; i++) {
       if(stars > i) {
         starElements.push(
-          <img key={i} src="src/assets/fullstar.png" alt="Star" className={styles.star}/>
+          <img key={i} src={fullStarImg} alt="Star" className={styles.star}/>
         )
       } else if(halfStar) {
         starElements.push(
-          <img key={i} src="src/assets/halfstar.png" alt="Half Star" className={styles.star}/>
+          <img key={i} src={halfStarImg} alt="Half Star" className={styles.star}/>
         )
         halfStar = false
       } else {
         starElements.push(
-          <img key={i} src="src/assets/emptystar.png" alt="Empty Star" className={styles.star}/>
+          <img key={i} src={emptyStarImg} alt="Empty Star" className={styles.star}/>
         )
       }
     }
