@@ -4,27 +4,28 @@ import Rating from "../Rating/Rating"
 import Loading from "../Route/Loading"
 import styles from "./Products.module.css"
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { DataContext } from "../Home Page/Home"
 
 function Products({ 
-  items, 
   setSelectedItem, 
   categoryData,
 }) {
+  const { data } = useContext(DataContext)
   const { category } = useParams()
   const [displayItems, setDisplayItems] = useState();
   const [sortValue, setSortValue]= useState()
 
   useEffect(() => {
-    if (category && items) {
+    if (category && data) {
       const selectedCategoryItems = categoryData[category];
       if(!sortValue) return setDisplayItems(selectedCategoryItems);
       sortItems(sortValue, selectedCategoryItems)
     } else {
-      if(!sortValue) return  setDisplayItems(items);
-      sortItems(sortValue, items)  
+      if(!sortValue) return  setDisplayItems(data);
+      sortItems(sortValue, data)  
     }
-  }, [category, categoryData, items, sortValue]); 
+  }, [category, categoryData, data, sortValue]); 
 
   function sortItems(value, array) {
     const sortedArray = [...array].sort((a,b) => {
@@ -47,10 +48,10 @@ function Products({
     sortItems(value, displayItems)
   }
  
-  if(!items) return <Loading/>
+  if(!data) return <Loading/>
   //Set Initial items
   if(!displayItems && !category) {
-    setDisplayItems(items)
+    setDisplayItems(data)
   } else if(!displayItems && category) {
     setDisplayItems(categoryData[category])
   }

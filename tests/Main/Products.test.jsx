@@ -5,6 +5,7 @@ import Products from "../../src/components/Products/Products";
 import NavBar from "../../src/components/Nav Bar/NavBar";
 import { useParams, MemoryRouter, useLocation } from "react-router-dom";
 import categoryData from "../MockData";
+import { DataContext } from "../../src/components/Home Page/Home";
 
 //Mock react-router-dom
 vi.mock("react-router-dom", async (importOriginal) => {
@@ -19,16 +20,17 @@ describe("Products Component", () => {
   
 
   const selected = vi.fn();
-  const items = Object.values(categoryData).flat();
+  const data = Object.values(categoryData).flat();
 
   function MyComponent() {
     const location = useLocation();
     return (
-      <>
+      <DataContext.Provider value={{data}}>
         <p>{location.pathname}</p>
-        <NavBar cart={items}/>
-        <Products items={items} setSelectedItem={selected} categoryData={categoryData} />
-      </>
+        <NavBar cart={data}/>
+        <Products setSelectedItem={selected} categoryData={categoryData} />
+      </DataContext.Provider>
+
     );
   }
 
@@ -149,7 +151,7 @@ describe("Products Component", () => {
           .map(item => item.textContent)
           .slice(1)
         // Replace the heading titles with their corresponding ratings
-        items.forEach(item => {
+        data.forEach(item => {
           const index = ratings.indexOf(item.title);
           if(index !== -1) {
             ratings[index] = item.rating.rate

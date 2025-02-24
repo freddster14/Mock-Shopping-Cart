@@ -5,6 +5,8 @@ import Feature from "../../src/components/Feature/Feature";
 import NavBar from "../../src/components/Nav Bar/NavBar";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import categoryData from "../MockData";
+import { useContext } from "react";
+import { DataContext } from "../../src/components/Home Page/Home";
 
 
 
@@ -15,20 +17,21 @@ describe("Feature Component", () => {
   const MockHome = ({ data }) => {
     const location = useLocation();
     return (
-      <>
+      <DataContext.Provider value={{data}}>
         <NavBar cart={[]}/>
         {location.pathname === "/" ?
-          <Feature data={data} categoryData={categoryData} setSelectedItem={setSelectedItem} />
+          <Feature categoryData={categoryData} setSelectedItem={setSelectedItem} />
           : <h1>{location.pathname}</h1>
         }
-      </>  
+      </DataContext.Provider>  
     )
   }
   const renderFeature = (data) => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
-        <MockHome  data={data}/>
-      </MemoryRouter>
+        <MemoryRouter initialEntries={["/"]}>
+          <MockHome  data={data}/>
+        </MemoryRouter>
+     
     )
   };
 

@@ -1,9 +1,10 @@
 import { MemoryRouter, useParams } from "react-router-dom";
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import Home from "../../src/components/Home Page/Home";
+import Home, { DataContext } from "../../src/components/Home Page/Home";
 import { render, screen, waitFor } from "@testing-library/react";
 import { setupServer } from "msw/node";
 import { HttpResponse, http } from "msw";
+import { useContext } from "react";
 
 //Mock fetch
 const server = setupServer(
@@ -62,17 +63,19 @@ vi.mock("/src/components/Product Page/ProductPage.jsx", () => ({
 }));
 
 vi.mock("/src/components/Products/Products.jsx", () => ({
-  default: ({items}) => (
-    <>
-     <div>Products</div>
-    {items && 
-      items.map(item => (
-        <div key={item.id}>{item.title}</div>
-      ))
-    }
-    </>
-   
-)
+  default: function ProductMock() {
+    const { data } = useContext(DataContext)
+    return(
+      <>
+        <div>Products</div>
+      {data && 
+        data.map(item => (
+          <div key={item.id}>{item.title}</div>
+        ))
+      }
+     </>
+    )
+  }
 }));
 
 vi.mock("/src/components/Cart/Cart.jsx", () => ({
@@ -102,11 +105,8 @@ vi.mock("/src/components/Feature/Feature.jsx", () => ({
 )
 }));
 
-
-
-
 describe("Home Component", () => {
-  const renderHome = async (params) => {
+  const renderHome = (params) => {
     useParams.mockReturnValue({name: params})
     return render(
       <MemoryRouter>
@@ -158,6 +158,7 @@ describe("Home Component", () => {
       expect(await screen.findByText("Samsung TV")).toBeInTheDocument();
       expect(await screen.getByText("Puma Shoes")).toBeInTheDocument();
     });
+
     it("fetches data from fakestoreapi and categorizes it", async () => {
         renderHome(undefined)
         const categoryConfirm = await screen.findAllByText(/same category/i);
@@ -167,6 +168,7 @@ describe("Home Component", () => {
           expect(e.textContent).not.toBe("not same category")
         })
     });
+
     it("display error message when server return error", async () => {
       const consoleError = vi.spyOn(console, "error");
       server.use(

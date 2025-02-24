@@ -1,11 +1,15 @@
 import NavBar from "../Nav Bar/NavBar";
 import Feature from "../Feature/Feature";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import Products from '../Products/Products'
 import ProductPage from "../Product Page/ProductPage"
 import { useParams } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useLocalStorage } from "../../LocalStorage";
+
+export const DataContext = createContext({
+    data: [],
+});
 
 function Home() {
   const { name } = useParams()
@@ -15,7 +19,7 @@ function Home() {
   const [categoryData, setCategoryData] = useState();
   
   useEffect(() => {
-    if(data) return
+    if(data) return;
     fetch('https://fakestoreapi.com/products', { mode: 'cors' })
     .then(res => {
       if(!res.ok){ throw new Error("Server Error") }
@@ -40,7 +44,7 @@ function Home() {
   }, [data, categoryData, setCategoryData])
   if(data === "error") return null;
   return (
-    <>
+    <DataContext.Provider value={{ data }}>
       <NavBar cart={cart}/>
       {  name === "product-page" ?
         <ProductPage
@@ -50,7 +54,6 @@ function Home() {
         />
       : name === "products" ?
         <Products 
-        items={data} 
         setSelectedItem={setSelectedItem} 
         categoryData={categoryData}
         />
@@ -59,12 +62,11 @@ function Home() {
         cart={cart} 
         setCart={setCart} />
       : <Feature 
-        data={data}
         categoryData={categoryData}
         setSelectedItem={setSelectedItem}
         />
       }
-    </>
+    </DataContext.Provider>
   )
 }
 

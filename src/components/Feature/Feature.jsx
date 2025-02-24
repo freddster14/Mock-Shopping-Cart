@@ -5,10 +5,12 @@ import { useLocalStorage } from "../../LocalStorage"
 import styles from './Feature.module.css'
 import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
+import { DataContext } from "../Home Page/Home"
 
-function Feature ({ data, setSelectedItem, categoryData, }) {
+function Feature ({ setSelectedItem, categoryData, }) {
   const [featureItems, setFeatureItems] = useLocalStorage("featureItems", "");
+  const { data } = useContext(DataContext)
   useEffect(() => {
     if (!data) {
       setFeatureItems(""); 
