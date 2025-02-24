@@ -3,12 +3,13 @@ import Counter from "../Counter/Counter"
 import SoldCount from "../Sold Count/SoldCount"
 import { updateCart } from "./CartLogic"
 import { Fragment, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import styles from "./Cart.module.css"
 
 function Cart({ 
   cart,
   setCart,
+  setSelectedItem,
 }) {
   const cartInfo = getCartInfo()
 
@@ -68,6 +69,7 @@ function Cart({
                       setCart={setCart}
                       removeItem={removeItem}
                       cartInfo={cartInfo}
+                      setSelectedItem={setSelectedItem}
                     />
                     </li>
                   </Fragment>
@@ -120,7 +122,8 @@ Cart.propTypes = {
           value: PropTypes.number.isRequired,  
       })
   ),
-  setCart: PropTypes.func
+  setCart: PropTypes.func,
+  setSelectedItem: PropTypes.func,
 }
 
 function CartItems({ 
@@ -129,7 +132,9 @@ function CartItems({
   setCart,
   removeItem,
   cartInfo,
+  setSelectedItem,
  }) {
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState({value: item.value})
   const isShippingFree = cartInfo.subTotal > 45;
   function updateQuantity(quantity) {
@@ -137,18 +142,26 @@ function CartItems({
     setQuantity(quantity)
     setCart(updatedCart)
   }
+
+  const handleProductClick = () => {
+    setSelectedItem(item)
+    navigate('/product-page')
+    window.scrollTo({
+      top:0,
+    });
+  }
   return (
     <>
-      <div className={styles.img_container}>
+      <div className={styles.img_container} onClick={handleProductClick}>
         <img src={item.image} alt={item.title} />
       </div>
       <div className={styles.item_info}>
         <div className={styles.item_heading}>
-          <div className={styles.heading_sold}>
+          <div className={styles.heading_sold} onClick={handleProductClick}>
             <h2>{item.title}</h2>
             <SoldCount rate={item.rating.rate} count={item.rating.count} /> 
           </div>
-          <p className={styles.price}>${parseFloat(item.price).toFixed(2)}</p>
+          <p className={styles.price} onClick={handleProductClick} >${parseFloat(item.price).toFixed(2)}</p>
         </div>
         <p>{isShippingFree ? "Free shipping" : "Free shipping over $45"}</p>
         <p>Free returns</p>
@@ -191,6 +204,7 @@ CartItems.propTypes = {
     ),
     setCart: PropTypes.func,
     cartInfo: PropTypes.object,
+    setSelectedItem: PropTypes.func,
 }
 
 export default Cart

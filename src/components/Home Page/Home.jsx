@@ -60,7 +60,9 @@ function Home() {
       : name === "cart" ?
         <Cart 
         cart={cart} 
-        setCart={setCart} />
+        setCart={setCart}
+        setSelectedItem={setSelectedItem}
+        />
       : <Feature 
         categoryData={categoryData}
         setSelectedItem={setSelectedItem}
