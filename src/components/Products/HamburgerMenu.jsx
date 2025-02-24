@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import styles from './Products.module.css'
 import PropTypes from "prop-types"
-
+import hamburgerIcon from "../../assets/icons8-hamburger-menu-50.png"
 
 export default function HamburgerMenu ({ menuDisplay ,setMenuDisplay }) {
   const [isActive, setIsActive] = useState(false);
@@ -31,7 +31,7 @@ export default function HamburgerMenu ({ menuDisplay ,setMenuDisplay }) {
   return (
     <input
       type="image"
-      src="/src/assets/icons8-hamburger-menu-50.png" 
+      src={hamburgerIcon} 
       alt="side bar button"
       className={`${styles.hamburger} ${isActive && styles.hamburger_active}`} 
       onClick={handleClick}
