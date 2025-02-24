@@ -91,6 +91,9 @@ function DisplayItems({ displayItems, setSelectedItem }) {
   function eventFunction(item) {
     setSelectedItem(item);
     navigate("/product-page")
+     window.scrollTo({
+      top:0,
+    });
   }
   return (
   <section>

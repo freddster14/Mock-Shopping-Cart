@@ -63,6 +63,9 @@ function FeatureContent ({
   function eventFunction(item) {
     setSelectedItem(item)
     navigate('/product-page')
+    window.scrollTo({
+      top:0,
+    });
   }
   return (
     <div className={styles.feature_container}>
